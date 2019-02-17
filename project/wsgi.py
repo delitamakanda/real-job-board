@@ -12,8 +12,8 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
-#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "activcar.settings")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings_production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings_production")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
