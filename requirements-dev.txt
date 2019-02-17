@@ -5,7 +5,7 @@ pytz==2017.3
 gunicorn>=19.6.0
 whitenoise==3.2
 django-filter==2.1.0
-dj-pagination==2.3.2
+dj-pagination==2.4.0
 python-decouple==3.1
 django-storages==1.6.5
 WeasyPrint==0.41
