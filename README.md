@@ -35,6 +35,17 @@ DEBUG=True
 OTHER_VARIABLE=variable_1
 ```
 
+Migrate models to db via orm
+```bash
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+
+Run local server
+```bash
+python3 manage.py runserver
+```
+
 
 
 ## Resources useful
