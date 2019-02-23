@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>dopejob - {% block title %}{% endblock %}{% block head_title %}{% endblock %}</title>
     <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="{% static 'styles/app.css' %}" rel="stylesheet" />
   </head>
 
@@ -27,6 +28,15 @@
                             <li><a href="{% url 'post_offer' %}">{% trans 'Poster une annonce' %}</a></li>
                             {% if user.is_authenticated %}
                             <li><a href="{% url 'profile' %}">{% trans 'Mon espace' %}</a></li>
+                            <li>
+                                <a href="{% url 'notifications' %}">
+                                  {% if request.user %}
+                                    <i class="fa fa-globe-europe red active icon"></i>
+                                  {% else %}
+                                    <i class="fa fa-globe-europe globe icon"></i>
+                                  {% endif %}
+                                </a>
+                            </li>
                             <li><a href="{% url 'logout' %}">{% trans 'Se déconnecter' %}</a></li>
                             {% else %}
                             <li><a href="{% url 'login' %}">{% trans 'Se connecter' %}</a></li>
