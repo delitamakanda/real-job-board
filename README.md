@@ -49,6 +49,6 @@ python3 manage.py runserver
 
 
 ## Resources useful
-- [AWS EB](https://stackoverflow.com/questions/41161691/how-to-run-a-celery-worker-with-django-app-scalable-by-aws-elastic-beanstalk)
+- [gitlab](https://gitlab.com/georgedorn/django-python-job-board/blob/master/python_job_board/models.py)
 - [Django Girls](https://tutorial.djangogirls.org/fr/)
 - [Django Girls: extensions](https://tutorial-extensions.djangogirls.org/en/)
