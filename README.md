@@ -50,3 +50,23 @@ python3 manage.py runserver
 - [gitlab](https://gitlab.com/georgedorn/django-python-job-board/blob/master/python_job_board/models.py)
 - [Django Girls](https://tutorial.djangogirls.org/fr/)
 - [Django Girls: extensions](https://tutorial-extensions.djangogirls.org/en/)
+
+## Flutter
+- https://flutter.dev/docs/get-started/web
+
+how to know connected devices
+```
+flutter devices
+```
+
+run the web app
+```
+flutter run -d chrome
+```
+
+build web app
+```
+flutter build web
+```
+
+voilà :)
