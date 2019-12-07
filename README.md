@@ -54,6 +54,11 @@ python3 manage.py runserver
 ## Flutter
 - https://flutter.dev/docs/get-started/web
 
+export variables environment flutter
+```
+export PATH=/Users/delitamakanda/Desktop/flutter/bin:$PATH
+```
+
 how to know connected devices
 ```
 flutter devices
