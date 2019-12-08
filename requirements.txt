@@ -18,3 +18,12 @@ beautifulsoup4==4.6.3
 django-render-block==0.5
 html2text==2018.1.9
 html5lib==1.0.1
+django-countries==5.5
+django-rest-auth==0.9.5
+djangorestframework-simplejwt==4.4.0
+stripe==2.41.0
+coreapi==2.3.3
+django-allauth==0.35.0
+djangorestframework==3.9.1
+markdown==2.6.11
+django-cors-headers==2.3.0

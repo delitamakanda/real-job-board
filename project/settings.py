@@ -33,7 +33,7 @@ SITE_ID = 1
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_CORE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,11 +42,27 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
+]
+
+THIRD_PARTY_APPS = [
     'dj_pagination',
     'storages',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth',
+    'rest_auth.registration',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders'
+]
+
+PROJECT_APPS = [
     'accounts',
     'jobboard',
 ]
+
+INSTALLED_APPS = DJANGO_CORE_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

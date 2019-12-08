@@ -55,6 +55,9 @@ python3 manage.py runserver
 - [Flutter multi page applications](https://proandroiddev.com/flutter-creating-multi-page-application-with-navigation-ef9f4a72d181)
 - [Flutter icons](https://api.flutter.dev/flutter/material/Icons-class.html)
 
+- [Flutter Django Search](https://medium.com/flutter-community/django-search-flutter-1cb3e8a5db1a)
+
+
 ## Flutter
 - https://flutter.dev/docs/get-started/web
 
