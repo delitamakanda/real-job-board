@@ -78,7 +78,7 @@ run ios simulator
 flutter run -d <device-id>
 ```
 
-press ```r```` to hot reload
+press ```r``` to hot reload
 
 build web app
 ```
