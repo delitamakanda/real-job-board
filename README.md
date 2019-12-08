@@ -50,6 +50,10 @@ python3 manage.py runserver
 - [gitlab](https://gitlab.com/georgedorn/django-python-job-board/blob/master/python_job_board/models.py)
 - [Django Girls](https://tutorial.djangogirls.org/fr/)
 - [Django Girls: extensions](https://tutorial-extensions.djangogirls.org/en/)
+- [Flutter Sidebar & Dashboard](https://youtu.be/VzuHfHyJcuI)
+- [Flutter Routing](https://www.youtube.com/watch?v=JWuXj0BY_s4)
+- [Flutter multi page applications](https://proandroiddev.com/flutter-creating-multi-page-application-with-navigation-ef9f4a72d181)
+- [Flutter icons](https://api.flutter.dev/flutter/material/Icons-class.html)
 
 ## Flutter
 - https://flutter.dev/docs/get-started/web
@@ -68,6 +72,13 @@ run the web app
 ```
 flutter run -d chrome
 ```
+
+run ios simulator
+```
+flutter run -d <device-id>
+```
+
+press ```r```` to hot reload
 
 build web app
 ```
