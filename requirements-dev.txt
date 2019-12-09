@@ -3,7 +3,7 @@ olefile==0.44
 Pillow==6.2.0
 pytz==2017.3
 gunicorn>=19.6.0
-whitenoise==3.2
+whitenoise==4.1.4
 django-filter==2.1.0
 dj-pagination==2.4.0
 python-decouple==3.1
