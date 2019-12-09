@@ -1,3 +1,6 @@
+from django.contrib import admin
+
+# Register your models here.
 from django import forms
 
 from django.contrib import admin
@@ -5,19 +8,19 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.core.mail import send_mail
 
-from accounts.forms import UserAdminCreationForm
-from accounts.forms import UserAdminChangeForm
+from authentication.forms import UserAdminCreationForm
+from authentication.forms import UserAdminChangeForm
 
-from accounts.models import User
-from accounts.models import Message
-from accounts.models import Faculty
-from accounts.models import Campus
-from accounts.models import Job
-from accounts.models import Employee
-from accounts.models import Student
-from accounts.models import Enterprise
-from accounts.models import Cursus
-from accounts.models import Notification
+from authentication.models import User
+from authentication.models import Message
+from authentication.models import Faculty
+from authentication.models import Campus
+from authentication.models import Job
+from authentication.models import Employee
+from authentication.models import Student
+from authentication.models import Enterprise
+from authentication.models import Cursus
+from authentication.models import Notification
 
 # Register your models here.
 class UserAdmin(BaseUserAdmin):

@@ -3,8 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
-from accounts.models import Enterprise
-from accounts.models import User
+from authentication.models import Enterprise
+from authentication.models import User
 
 # Create your models here.
 class Annonce(models.Model):
@@ -58,7 +58,7 @@ class Annonce(models.Model):
 
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, db_index=True, unique=True, null=True)
-    enterprise = models.ForeignKey('accounts.Enterprise', on_delete=models.CASCADE)
+    enterprise = models.ForeignKey('authentication.Enterprise', on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     is_available = models.BooleanField(default=True)

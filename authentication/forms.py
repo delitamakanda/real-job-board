@@ -2,11 +2,11 @@ from django import forms
 from django.forms.widgets import SelectDateWidget
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from accounts.models import User
-from accounts.models import Student
-from accounts.models import Employee
-from accounts.models import Enterprise
-from accounts.models import Message
+from authentication.models import User
+from authentication.models import Student
+from authentication.models import Employee
+from authentication.models import Enterprise
+from authentication.models import Message
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -92,7 +92,7 @@ class EnterpriseProfileForm(RegisterForm):
 
     class Meta:
         model = Enterprise
-        exclude = ('friends', 'active', 'staff', 'admin', 'last_login',)
+        exclude = ('network', 'active', 'staff', 'admin', 'last_login', 'username',)
 
 
 class EmployeeProfileForm(RegisterForm):
@@ -100,7 +100,7 @@ class EmployeeProfileForm(RegisterForm):
 
     class Meta:
         model = Employee
-        exclude = ('friends', 'active', 'staff', 'admin', 'last_login',)
+        exclude = ('network', 'active', 'staff', 'admin', 'last_login', 'username',)
 
 
 class StudentProfileForm(RegisterForm):
@@ -108,7 +108,7 @@ class StudentProfileForm(RegisterForm):
 
     class Meta:
         model = Student
-        exclude = ('friends', 'active', 'staff', 'admin', 'last_login',)
+        exclude = ('network', 'active', 'staff', 'admin', 'last_login', 'username',)
 
 
 

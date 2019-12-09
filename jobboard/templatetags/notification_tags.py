@@ -1,6 +1,6 @@
 from django import template
 
-from accounts.models import Notification
+from authentication.models import Notification
 
 register = template.Library()
 

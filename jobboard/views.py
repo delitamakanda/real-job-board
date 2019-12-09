@@ -10,13 +10,13 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.core.mail import EmailMessage
 
-from accounts.models import User
-from accounts.models import Student
-from accounts.models import Employee
-from accounts.models import Enterprise
+from authentication.models import User
+from authentication.models import Student
+from authentication.models import Employee
+from authentication.models import Enterprise
 
 from jobboard.models import Annonce
-from accounts.models import Notification
+from authentication.models import Notification
 
 from jobboard.filters import AnnonceFilter
 
@@ -35,7 +35,7 @@ def index(request):
     })
 
 
-@login_required(login_url=reverse_lazy('login'), redirect_field_name=None)
+@login_required(login_url=reverse_lazy('access_login'), redirect_field_name=None)
 def post_annonce(request):
     if request.method == 'POST':
         form = PostAnnonceForm(request.POST, request.FILES)

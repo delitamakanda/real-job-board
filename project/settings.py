@@ -58,7 +58,7 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
-    'accounts',
+    'authentication',
     'jobboard',
 ]
 
@@ -73,6 +73,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'dj_pagination.middleware.PaginationMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -156,8 +158,11 @@ LOCALE_PATHS = (
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = 'staticfiles'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/'),
@@ -167,11 +172,38 @@ DEFAULT_FROM_EMAIL = 'no-reply@dopejob.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Dango Allauth settings
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-AUTH_USER_MODEL = 'accounts.User'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+AUTH_USER_MODEL = 'authentication.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+# cors header
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = [
+    'https://dopejob.herokuapp.com',
+    'http://localhost:8000',
+]
+

@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 from bs4 import BeautifulSoup
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -10,13 +13,13 @@ from django.template.loader import render_to_string
 
 from django.contrib import messages
 
-from accounts.models import User
-from accounts.models import Notification
+from authentication.models import User
+from authentication.models import Notification
 
-from accounts.forms import StudentProfileForm
-from accounts.forms import EmployeeProfileForm
-from accounts.forms import EnterpriseProfileForm
-from accounts.forms import LoginForm
+from authentication.forms import StudentProfileForm
+from authentication.forms import EmployeeProfileForm
+from authentication.forms import EnterpriseProfileForm
+from authentication.forms import LoginForm
 
 from django.views.generic import ListView
 

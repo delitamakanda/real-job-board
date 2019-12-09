@@ -1,4 +1,4 @@
-Django>=2.0.11
+Django>=2.2.8
 olefile==0.44
 Pillow==6.2.0
 pytz==2017.3
@@ -23,7 +23,8 @@ django-rest-auth==0.9.5
 djangorestframework-simplejwt==4.4.0
 stripe==2.41.0
 coreapi==2.3.3
-django-allauth==0.35.0
-djangorestframework==3.9.1
+django-allauth==0.39.1
+djangorestframework==3.10.3
 markdown==2.6.11
 django-cors-headers==2.3.0
+pyyaml==5.2

@@ -1,6 +1,6 @@
 from django import forms
 from jobboard.models import Annonce
-from accounts.models import Enterprise
+from authentication.models import Enterprise
 
 
 class PostAnnonceForm(forms.ModelForm):

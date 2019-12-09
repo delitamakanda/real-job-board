@@ -27,7 +27,7 @@
                             <li><a href="{% url 'jobs_list' %}">{% trans 'Liste des annonces' %}</a></li>
                             <li><a href="{% url 'post_offer' %}">{% trans 'Poster une annonce' %}</a></li>
                             {% if user.is_authenticated %}
-                            <li><a href="{% url 'profile' %}">{% trans 'Mon espace' %}</a></li>
+                            <li><a href="{% url 'access_profile' %}">{% trans 'Mon espace' %}</a></li>
                             <li>
                                 <a href="{% url 'notifications' %}">
                                   {% if request.user %}
@@ -37,9 +37,9 @@
                                   {% endif %}
                                 </a>
                             </li>
-                            <li><a href="{% url 'logout' %}">{% trans 'Se déconnecter' %}</a></li>
+                            <li><a href="{% url 'access_logout' %}">{% trans 'Se déconnecter' %}</a></li>
                             {% else %}
-                            <li><a href="{% url 'login' %}">{% trans 'Se connecter' %}</a></li>
+                            <li><a href="{% url 'access_login' %}">{% trans 'Se connecter' %}</a></li>
                             {% endif %}
                         </ul>
                     </div>

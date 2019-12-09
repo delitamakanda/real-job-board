@@ -1,3 +1,6 @@
+from django.db import models
+
+# Create your models here.
 import uuid
 
 from django.db import models
@@ -63,9 +66,16 @@ class User(AbstractBaseUser):
     admin = models.BooleanField(default=False)
     home_phone_number = models.CharField(max_length=20, blank=True)
     mobile_phone_number = models.CharField(max_length=30, blank=True)
-    friends = models.ManyToManyField('self')
-    faculty = models.ForeignKey('Faculty', on_delete=models.CASCADE, blank=True, null=True)
+    network = models.ManyToManyField('self')
+    # faculty = models.ForeignKey('Faculty', on_delete=models.CASCADE, blank=True, null=True)
     user_type = 'generic'
+    username = models.CharField(
+        verbose_name='username',
+        max_length=255,
+        unique=True,
+        null=True,
+        blank=True
+    )
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -97,6 +107,12 @@ class User(AbstractBaseUser):
     @property
     def is_admin(self):
         return self.admin
+
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = self.email
+        super(User, self).save(*args, **kwargs)
+
 
 class Message(models.Model):
     GENERAL = 'GE'
@@ -237,9 +253,10 @@ class Employee(User):
 
 
 class Student(User):
-    campus = models.ForeignKey(Campus, on_delete=models.CASCADE)
-    year = models.IntegerField()
+    campus = models.ForeignKey(Campus, on_delete=models.CASCADE, blank=True, null=True)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, blank=True, null=True)
     user_type = 'student'
+    year = models.IntegerField()
 
     def __str__(self):
         return 'Student {}'.format(self.campus.name)

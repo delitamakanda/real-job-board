@@ -15,29 +15,29 @@
                 <option {% if employeeForm.is_bound %}selected="selected"{% endif %} value="enterprise">{% trans 'Entreprise' %}</option>
             </select>
         </form>
-        <form action="{% url 'register' %}" method="get" id="studentForm">
+        <form action="{% url 'access_register' %}" method="get" id="studentForm">
             {% csrf_token %}
             {{ studentForm.as_p }}
 
             <input type="hidden" name="profileType" value="student" />
             <button class="button button-primary" type="submit">{% trans "Créer un compte" %}</button>
-            <a class="link" href="{% url 'login' %}">{% trans "Se connecter" %}</a>
+            <a class="link" href="{% url 'access_login' %}">{% trans "Se connecter" %}</a>
         </form>
-        <form action="{% url 'register' %}" method="get" id="employeeForm">
+        <form action="{% url 'access_register' %}" method="get" id="employeeForm">
             {% csrf_token %}
             {{ employeeForm.as_p }}
 
             <input type="hidden" name="profileType" value="employee" />
             <button class="button button-primary" type="submit">{% trans "Créer un compte" %}</button>
-            <a class="link" href="{% url 'login' %}">{% trans "Se connecter" %}</a>
+            <a class="link" href="{% url 'access_login' %}">{% trans "Se connecter" %}</a>
         </form>
-        <form action="{% url 'register' %}" method="get" id="enterpriseForm">
+        <form action="{% url 'access_register' %}" method="get" id="enterpriseForm">
             {% csrf_token %}
             {{ enterpriseForm.as_p }}
 
             <input type="hidden" name="profileType" value="enterprise" />
             <button class="button button-primary" type="submit">{% trans "Créer un compte" %}</button>
-            <a class="link" href="{% url 'login' %}">{% trans "Se connecter" %}</a>
+            <a class="link" href="{% url 'access_login' %}">{% trans "Se connecter" %}</a>
         </form>
     </div>
 </div>
