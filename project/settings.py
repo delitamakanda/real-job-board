@@ -75,6 +75,7 @@ MIDDLEWARE = [
     'dj_pagination.middleware.PaginationMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
