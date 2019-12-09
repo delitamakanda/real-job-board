@@ -11,7 +11,7 @@ ALLOWED_HOSTS = ['*']
 
 DEBUG = config('DEBUG', cast=bool)
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ADMINS = (
     ('Délita', 'delita.makanda@gmail.com'),
