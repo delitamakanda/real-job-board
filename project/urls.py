@@ -37,6 +37,8 @@ urlpatterns = [
 
     url(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
     url(r'^account-confirm-email/$', VerifyEmailView.as_view(), name='account_email_verification_sent'),
+
+    path('api-job/', include('jobboard.api.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
