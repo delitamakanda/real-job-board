@@ -25,6 +25,7 @@ from rest_auth.registration.views import VerifyEmailView
 
 urlpatterns = [
     path('', include('jobboard.urls')),
+
     path('auth/', include('authentication.urls')),
 
     path('api-auth/', include('rest_framework.urls')),
@@ -39,6 +40,7 @@ urlpatterns = [
     url(r'^account-confirm-email/$', VerifyEmailView.as_view(), name='account_email_verification_sent'),
 
     path('api-job/', include('jobboard.api.urls')),
+    path('api-authentication/', include('authentication.api.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
