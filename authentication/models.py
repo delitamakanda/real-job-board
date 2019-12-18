@@ -244,7 +244,7 @@ class Cursus(models.Model):
 
 class Employee(User):
     office = models.CharField(max_length=30)
-    campus = models.ForeignKey(Campus, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, blank=True, null=True)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     user_type = 'employee'
 
@@ -253,7 +253,7 @@ class Employee(User):
 
 
 class Student(User):
-    campus = models.ForeignKey(Campus, on_delete=models.CASCADE, blank=True, null=True)
+    cursus = models.ForeignKey(Cursus, on_delete=models.CASCADE, blank=True, null=True)
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, blank=True, null=True)
     user_type = 'student'
     year = models.IntegerField()
