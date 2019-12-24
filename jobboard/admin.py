@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from jobboard.models import Annonce
+from jobboard.models import Annonce, ObjectViewed
+
 # Register your models here.
 class AnnonceAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'is_available', 'enterprise', 'localization']
@@ -14,3 +15,4 @@ class AnnonceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Annonce, AnnonceAdmin)
+admin.site.register(ObjectViewed)
