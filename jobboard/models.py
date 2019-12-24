@@ -10,9 +10,24 @@ from django.contrib.contenttypes.models import ContentType
 from authentication.models import Enterprise
 from authentication.models import User
 
+User = settings.AUTH_USER_MODEL 
+
 # Create your models here.
 class ObjectViewed(models.Model):
-    pass
+    user = models.ForeignKey(User, blank=True, null=True)
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return "%s viewed on %s" %(self.content_object, self.timestamp)
+    
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = 'Object viewed'
+        verbose_name_plural = 'Objects viewed'
 
 
 class Annonce(models.Model):
