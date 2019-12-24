@@ -1,12 +1,20 @@
+from django.conf import settings
 from django.db import models
 
 from django.utils import timezone
 from django.urls import reverse
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
 from authentication.models import Enterprise
 from authentication.models import User
 
 # Create your models here.
+class ObjectViewed(models.Model):
+    pass
+
+
 class Annonce(models.Model):
     LANGUAGES_FRENCH = 'FR'
     LANGUAGES_ENGLISH = 'EN'
