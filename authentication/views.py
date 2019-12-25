@@ -51,7 +51,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/accounts/login')
+    return redirect('/jobs_list')
 
 def register_view(request):
     if len(request.GET) > 0 and 'profileType' in request.GET:
@@ -61,17 +61,17 @@ def register_view(request):
             studentForm = StudentProfileForm(request.GET, prefix="st")
             if studentForm.is_valid():
                 studentForm.save()
-                return redirect('/accounts/login')
+                return redirect('/auth/access_login')
         elif request.GET['profileType'] == 'employee':
             employeeForm = EmployeeProfileForm(request.GET, prefix="em")
             if employeeForm.is_valid():
                 employeeForm.save()
-                return redirect('/accounts/login')
+                return redirect('/auth/access_login')
         elif request.GET['profileType'] == 'enterprise':
             enterpriseForm = EnterpriseProfileForm(request.GET, prefix="en")
             if enterpriseForm.is_valid():
                 enterpriseForm.save()
-                return redirect('/accounts/login')
+                return redirect('/auth/access_login')
         return render(request, 'register.html', {'studentForm': studentForm, 'employeeForm': employeeForm, 'enterpriseForm': enterpriseForm})
     else:
         studentForm = StudentProfileForm(prefix="st")

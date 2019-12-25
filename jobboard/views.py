@@ -41,22 +41,27 @@ def post_annonce(request):
         form = PostAnnonceForm(request.POST, request.FILES)
         if form.is_valid():
             # car = form.save(commit=False)
-            #car.owner = request.user
+            # car.owner = request.user
             # car.save()
             instance = form.save(commit=False)
+            enterprise = Enterprise.objects.get(email=request.user.email)
+            instance.enterprise = enterprise
             instance.save()
 
-            receiver = User.objects.filter(email=instance.email).first()
-            content_type = ContentType.objects.get(model='annonce')
+            try:
+                receiver = User.objects.filter(email=instance.email).first()
+                content_type = ContentType.objects.get(model='annonce')
 
-            notif = Notification.objects.create(
-                receiver=receiver,
-                content_type=content_type,
-                object_id=instance.id,
-                status='annonce'
-            )
+                notif = Notification.objects.create(
+                    receiver=receiver,
+                    content_type=content_type,
+                    object_id=instance.id,
+                    status='annonce'
+                )
 
-            notif.save()
+                notif.save()
+            except:
+                pass
 
             messages.add_message(
                 request, messages.SUCCESS, _('Annonce ajoutée. N\'oubliez pas de la publier quand elle sera prête.')

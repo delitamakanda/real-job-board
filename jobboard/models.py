@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from django.utils.text import slugify
+
 from django.utils import timezone
 from django.urls import reverse
 
@@ -52,22 +54,26 @@ class Annonce(models.Model):
     FIELD_SOCIAL_MEDIA = 'SM'
     FIELD_MISCELLARY = 'MI'
 
-    LANGUAGES_CHOICES = (
+    LANGUAGES_CHOICES = [
         (LANGUAGES_FRENCH,'French'),
         (LANGUAGES_ENGLISH, 'English'),
-    )
+    ]
 
-    OFFER_CHOICES = (
+    OFFER_CHOICES = [
         (OFFER_CDI,'CDI'),
         (OFFER_CDD, 'CDD'),
         (OFFER_FREELANCE,'Freelance'),
         (OFFER_STAGE, 'Stage'),
         (OFFER_ALTERNANCE,'Alternance'),
+        
+    ]
+
+    TIME_CHOICES = [
         (OFFER_FULLTIME, 'Temps plein'),
         (OFFER_HALFTIME, 'Temps partiel'),
-    )
+    ]
 
-    JOB_FIELDS_CHOICES = (
+    JOB_FIELDS_CHOICES = [
         (FIELD_UI, 'UI design'),
         (FIELD_FRONT_END, 'Front-end development'),
         (FIELD_BACK_END, 'Back-end development'),
@@ -77,7 +83,7 @@ class Annonce(models.Model):
         (FIELD_MANAGEMENT, 'Management'),
         (FIELD_SOCIAL_MEDIA, 'Social Media Expert'),
         (FIELD_MISCELLARY, 'Miscellary'),
-    )
+    ]
 
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, db_index=True, unique=True, null=True)
@@ -91,6 +97,7 @@ class Annonce(models.Model):
     language = models.CharField(max_length=2, choices=LANGUAGES_CHOICES, default=LANGUAGES_FRENCH)
     job_offer = models.CharField(max_length=3, choices=OFFER_CHOICES, default=OFFER_CDI)
     job_fields = models.CharField(max_length=2, choices=JOB_FIELDS_CHOICES, default=FIELD_UI)
+    job_time = models.CharField(max_length=3, choices=TIME_CHOICES, default=OFFER_FULLTIME)
 
     class Meta:
         ordering = ('published_date',)

@@ -6,4 +6,4 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Annonce
-        fields = ('id', 'title', 'slug', 'enterprise', 'created_date', 'published_date', 'is_available', 'localization', 'contact_email', 'url_redirection', 'language', 'job_offer', 'job_fields',)
+        fields = ('id', 'title', 'slug', 'enterprise', 'created_date', 'published_date', 'is_available', 'localization', 'contact_email', 'url_redirection', 'language', 'job_offer', 'job_fields', 'job_time',)

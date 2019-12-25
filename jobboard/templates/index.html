@@ -28,9 +28,9 @@
                     <a href="#" class="cars">
                         <div class="cars-reference">
                             {% if job.image %}
-                            <img src="{{ job.image.url|default_if_none:'#' }}" class="image" alt="{{ job.title }}"/>
+                            <img src="{{ job.image.url }}" class="image" alt="{{ job.title }}"/>
                             {% else %}
-                            <img src="{% static 'images/none.png' %}" class="image" alt="{{ job.title }}" />
+                            <img src="{% static 'images/logo.png' %}" class="image" alt="{{ job.title }}" />
                             {% endif %}
                         </div>
                         <div class="cars-reference cars-description">
@@ -38,7 +38,8 @@
                             <div class="cars-meta">{{ job.get_job_offer_display }}</div>
                         </div>
                         <div class="cars-reference">
-                            <div class="cars-location">{{ job.localization }}</div>
+                            {% if job.localization %}<div class="cars-location">{{ job.localization }}</div> {% endif %}
+                            {% if job.language %}<div class="cars-language">{{ job.language }}</div> {% endif %}
                         </div>
                     </a>
                 </li>

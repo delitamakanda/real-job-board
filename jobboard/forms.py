@@ -4,8 +4,8 @@ from authentication.models import Enterprise
 
 
 class PostAnnonceForm(forms.ModelForm):
-    job_offer = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Annonce.OFFER_CHOICES)
-    job_fields = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Annonce.JOB_FIELDS_CHOICES)
+    language = forms.ChoiceField(widget=forms.RadioSelect, choices=Annonce.LANGUAGES_CHOICES)
+    job_time = forms.ChoiceField(widget=forms.RadioSelect, choices=Annonce.TIME_CHOICES)
 
     class Meta:
         model = Annonce
@@ -15,6 +15,7 @@ class PostAnnonceForm(forms.ModelForm):
             'localization',
             'job_offer',
             'job_fields',
+            'job_time',
             'language',
             'url_redirection',
         )

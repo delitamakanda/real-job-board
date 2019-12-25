@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from django_filters import rest_framework as filters
 
+from jobboard.signals import object_viewed_signal
 from ..models import Annonce
 
 from .serializers import AnnonceSerializer
@@ -12,3 +13,4 @@ class AnnonceViewSet(viewsets.ModelViewSet):
     serializer_class = AnnonceSerializer
     filter_backends = ( filters.DjangoFilterBackend, )
     filterset_class = AnnonceFilter
+    lookup_field = 'slug'

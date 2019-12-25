@@ -180,6 +180,12 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+from django.urls import reverse_lazy
+
+LOGIN_URL = reverse_lazy('access_login')
+LOGIN_REDIRECT_URL = reverse_lazy('access_profile')
+LOGOUT_REDIRECT_URL = reverse_lazy('jobs_list')
+
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
