@@ -14,9 +14,9 @@ User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 class ObjectViewed(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     ip_address = models.GenericIPAddressField(blank=True, null=True)
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     timestamp = models.DateTimeField(auto_now_add=True)
