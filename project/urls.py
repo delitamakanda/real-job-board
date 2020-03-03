@@ -21,10 +21,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
+from django.views.decorators.cache import cache_page
+
 from rest_auth.registration.views import VerifyEmailView
 
 urlpatterns = [
-    path('', include('jobboard.urls')),
+    path('jobboard', include('jobboard.urls')),
 
     path('auth/', include('authentication.urls')),
 
@@ -41,9 +43,9 @@ urlpatterns = [
 
     path('api-job/', include('jobboard.api.urls')),
     path('api-authentication/', include('authentication.api.urls')),
+
+    url(r'.*', cache_page(settings.PAGE_CACHE_SECONDS)(TemplateView.as_view(template_name='index.html')), name='index'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# urlpatterns += [url(r'.*', TemplateView.as_view(template_name='index.html'))]

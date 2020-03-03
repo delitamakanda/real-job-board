@@ -47,3 +47,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 # media upload files on S3 AWS
 
 DEFAULT_FILE_STORAGE = 'project.storage_backends.MediaStorage'
+
+# Cache
+
+PAGE_CACHE_SECONDS = 60

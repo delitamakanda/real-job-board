@@ -24,3 +24,4 @@ djangorestframework==3.10.3
 markdown==2.6.11
 django-cors-headers==3.2.0
 pyyaml==5.2
+django-webpack-loader==0.7.0

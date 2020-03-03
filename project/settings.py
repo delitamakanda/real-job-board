@@ -55,6 +55,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_filters',
+    'webpack_loader',
 ]
 
 PROJECT_APPS = [
@@ -83,7 +84,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -157,17 +158,25 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static/'),
+    # os.path.join(BASE_DIR, 'static/'),
+    os.path.join(BASE_DIR, "frontend", "build"),
 )
+
+# webpack loader
+
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "CACHE": not DEBUG,
+        "BUNDLE_DIR_NAME": "frontend/build/",
+        "STATS_FILE": os.path.join(BASE_DIR, "frontend", "webpack-stats.json"),
+    }
+}
 
 DEFAULT_FROM_EMAIL = 'no-reply@dopejob.com'
 
@@ -218,3 +227,6 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:59961',
 ]
 
+# Cache
+
+PAGE_CACHE_SECONDS = 1
