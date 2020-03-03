@@ -9,7 +9,7 @@ module.exports = {
     if (env === 'development') {
       config.output.publicPath = 'http://localhost:3000/';
     } else if (env === 'production') {
-      config.output.publicPath = 'https://dopejob.herokuapp.com/';
+      config.output.publicPath = '/static/';
     }
 
     config.plugins.push(
