@@ -9,7 +9,7 @@ module.exports = {
     if (env === 'development') {
       config.output.publicPath = 'http://localhost:3000/';
     } else if (env === 'production') {
-      config.output.publicPath = '/static/frontend/build/';
+      config.output.publicPath = './';
     }
 
     config.plugins.push(

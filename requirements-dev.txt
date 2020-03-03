@@ -8,7 +8,7 @@ django-filter==2.1.0
 dj-pagination==2.4.0
 python-decouple==3.1
 django-storages==1.6.5
-WeasyPrint==0.41
+WeasyPrint==0.51
 celery==4.2.0
 beautifulsoup4==4.6.3
 django-render-block==0.5
