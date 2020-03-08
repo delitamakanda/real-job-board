@@ -6,31 +6,10 @@ from django.utils.text import slugify
 from django.utils import timezone
 from django.urls import reverse
 
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-
 from authentication.models import Enterprise
 from authentication.models import User
 
 User = settings.AUTH_USER_MODEL 
-
-# Create your models here.
-class ObjectViewed(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-    ip_address = models.GenericIPAddressField(blank=True, null=True)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    timestamp = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return "%s viewed on %s" %(self.content_object, self.timestamp)
-    
-    class Meta:
-        ordering = ['-timestamp']
-        verbose_name = 'Object viewed'
-        verbose_name_plural = 'Objects viewed'
-
 
 class Annonce(models.Model):
     LANGUAGES_FRENCH = 'FR'
@@ -92,12 +71,15 @@ class Annonce(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     is_available = models.BooleanField(default=True)
     localization = models.CharField(max_length=100, blank=True, null=True)
+    contact_name = models.CharField(max_length=256, blank=True, null=True)
     contact_email = models.EmailField(max_length=180, null=True)
     url_redirection = models.URLField(max_length=740, blank=True)
     language = models.CharField(max_length=2, choices=LANGUAGES_CHOICES, default=LANGUAGES_FRENCH)
     job_offer = models.CharField(max_length=3, choices=OFFER_CHOICES, default=OFFER_CDI)
     job_fields = models.CharField(max_length=2, choices=JOB_FIELDS_CHOICES, default=FIELD_UI)
     job_time = models.CharField(max_length=3, choices=TIME_CHOICES, default=OFFER_FULLTIME)
+    job_description = models.CharField(max_length=4096, blank=True, null=True)
+    requirements = models.CharField(max_length=4096, blank=True, null=True)
 
     class Meta:
         ordering = ('published_date',)
@@ -124,4 +106,4 @@ class Annonce(models.Model):
         return self.model in (self.OFFER_CDI, self.OFFER_CDD)
 
     def __str__(self):
-        return 'Annonce {}'.format(self.title)
+        return 'Annonce {} - {}'.format(self.title, self.localization)

@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django import forms
 
-from jobboard.models import Annonce, ObjectViewed
+from jobboard.models import Annonce
 
 # Register your models here.
 class AnnonceAdmin(admin.ModelAdmin):
@@ -13,6 +14,12 @@ class AnnonceAdmin(admin.ModelAdmin):
     class Meta:
         model = Annonce
 
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super(AnnonceAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        if 'description' in db_field.name or db_field.name == 'requirements':
+            formfield.widget = forms.Textarea(attrs=formfield.widget.attrs)
+        return formfield
+
+
 
 admin.site.register(Annonce, AnnonceAdmin)
-admin.site.register(ObjectViewed)

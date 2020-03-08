@@ -264,7 +264,8 @@ class Student(User):
 
 class Enterprise(User):
     logo = models.ImageField(upload_to='enterprise_image/%Y/%m/%d/', blank=True)
-    office = models.CharField(max_length=30)
+    office = models.CharField(max_length=255)
+    company_url = models.URLField(blank=True, null=True)
     address = models.TextField()
     description = models.CharField(max_length=300, blank=True)
     user_type = 'enterprise'
