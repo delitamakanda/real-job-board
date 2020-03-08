@@ -201,8 +201,8 @@ class Notification(models.Model, ContentTypeToGetModel):
 
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=30, unique=True)
-    color = models.CharField(max_length=6)
+    name = models.CharField(max_length=255, unique=True)
+    color = models.CharField(max_length=10)
 
     class Meta:
         verbose_name = 'Faculty'
@@ -213,8 +213,8 @@ class Faculty(models.Model):
 
 
 class Campus(models.Model):
-    name = models.CharField(max_length=30)
-    address = models.CharField(max_length=60)
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=1000)
 
     class Meta:
         verbose_name = 'Campus'
@@ -225,14 +225,14 @@ class Campus(models.Model):
 
 
 class Job(models.Model):
-    title = models.CharField(max_length=30, unique=True)
+    title = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return 'Job Title: {}'.format(self.title)
 
 
 class Cursus(models.Model):
-    title = models.CharField(max_length=30, unique=True)
+    title = models.CharField(max_length=255, unique=True)
 
     class Meta:
         verbose_name = 'Cursus'
