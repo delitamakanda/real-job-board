@@ -42,7 +42,7 @@ class EnterpriseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Enterprise
-        fields = ('logo', 'office', 'address', 'description', 'user_type',)
+        fields = ('logo', 'office', 'company_url', 'address', 'description', 'user_type',)
 
 
 class StudentSerializer(serializers.ModelSerializer):
