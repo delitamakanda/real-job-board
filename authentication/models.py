@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 import uuid
 
 from django.db import models
@@ -8,6 +7,7 @@ from django.contrib.auth.models import ( BaseUserManager, AbstractBaseUser )
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -130,7 +130,7 @@ class Message(models.Model):
         choices=TOPIC_CHOICES,
         default=GENERAL,
     )
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
     publication_date = models.DateField(auto_now_add=True)
 
@@ -174,7 +174,7 @@ class ContentTypeToGetModel(object):
 
 
 class Notification(models.Model, ContentTypeToGetModel):
-    receiver = models.ForeignKey(User, related_name='notification_receiver',on_delete=models.CASCADE)
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notification_receiver',on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, related_name='notifications', on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
@@ -209,7 +209,7 @@ class Faculty(models.Model):
         verbose_name_plural = 'Faculties'
 
     def __str__(self):
-        return 'Name {}'.format(self.name)
+        return 'Faculté: {}'.format(self.name)
 
 
 class Campus(models.Model):
@@ -221,14 +221,14 @@ class Campus(models.Model):
         verbose_name_plural = 'Campus'
 
     def __str__(self):
-        return 'Name {}'.format(self.name)
+        return 'Campus: {}'.format(self.name)
 
 
 class Job(models.Model):
     title = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
-        return 'Name {}'.format(self.title)
+        return 'Job Title: {}'.format(self.title)
 
 
 class Cursus(models.Model):
@@ -239,13 +239,13 @@ class Cursus(models.Model):
         verbose_name_plural = 'Cursus'
 
     def __str__(self):
-        return 'Name {}'.format(self.title)
+        return 'Cursus: {}'.format(self.title)
 
 
 class Employee(User):
     office = models.CharField(max_length=30)
-    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, blank=True, null=True)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, blank=True, null=True)
+    job = models.ForeignKey(Job, on_delete=models.SET_NULL, blank=True, null=True)
     user_type = 'employee'
 
     def __str__(self):
@@ -253,13 +253,13 @@ class Employee(User):
 
 
 class Student(User):
-    cursus = models.ForeignKey(Cursus, on_delete=models.CASCADE, blank=True, null=True)
-    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, blank=True, null=True)
+    cursus = models.ForeignKey(Cursus, on_delete=models.SET_NULL, blank=True, null=True)
+    faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, blank=True, null=True)
     user_type = 'student'
     year = models.IntegerField()
 
     def __str__(self):
-        return 'Student {}'.format(self.campus.name)
+        return 'Student {}'.format(self.faculty.name)
 
 
 class Enterprise(User):

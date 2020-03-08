@@ -25,3 +25,5 @@ markdown==2.6.11
 django-cors-headers==3.2.0
 pyyaml==5.2
 django-webpack-loader==0.7.0
+requests==2.23.0
+xlrd==1.2.0

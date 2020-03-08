@@ -56,3 +56,16 @@ python3 manage.py runserver
 - [Flutter icons](https://api.flutter.dev/flutter/material/Icons-class.html)
 - [Flutter Django Search](https://medium.com/flutter-community/django-search-flutter-1cb3e8a5db1a)
 
+
+# commands
+```
+python3 manage.py import_job_title_from_onisep_as_xml
+```
+
+```
+python3 manage.py import_cursus_from_datagouv_as_xls data/cursus.xls
+```
+
+```
+python3 manage.py import_faculty_from_datagouv_as_json
+```
