@@ -1,3 +1,5 @@
+from rest_auth.registration.serializers import RegisterSerializer
+
 from rest_framework import serializers
 
 from ..models import Enterprise, Student, Employee, Cursus, Job, Campus, Faculty, Notification, Message, User
@@ -42,21 +44,21 @@ class EnterpriseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Enterprise
-        fields = ('logo', 'office', 'company_url', 'address', 'description', 'user_type',)
+        exclude = ('network', 'active', 'staff', 'admin', 'last_login', 'password',)
 
 
 class StudentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        fields = '__all__'
+        exclude = ('network', 'active', 'staff', 'admin', 'last_login', 'password',)
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = '__all__'
+        exclude = ('network', 'active', 'staff', 'admin', 'last_login','password',)
 
 
 class CursusSerializer(serializers.ModelSerializer):
@@ -71,3 +73,15 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = '__all__'
+
+
+class StudentRegisterSerializer(RegisterSerializer, StudentSerializer):
+    pass
+
+
+class EmployeeRegisterSerializer(RegisterSerializer, EmployeeSerializer):
+    pass
+
+
+class EnterpriseRegisterSerializer(RegisterSerializer, EnterpriseSerializer):
+    pass

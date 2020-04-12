@@ -16,5 +16,8 @@ router.register('user', views.UserViewSet)
 router.register('message', views.MessageViewSet)
 
 urlpatterns = [
+    path('student-registration', views.StudentRegistrationView.as_view(), name="student_registration"),
+    path('employee-registration', views.EmployeeRegistrationView.as_view(), name="employee_registration"),
+    path('enterprise-registration', views.EntrepriseRegistrationView.as_view(), name="enterprise_registration"),
     path('', include(router.urls))
 ]
