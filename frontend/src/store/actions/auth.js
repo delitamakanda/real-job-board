@@ -102,14 +102,93 @@ export function authLoginUser(username, password, redirect = '/') {
     };
 }
 
-export const authSignup = (email, password1, password2) => {
+export const authEmployeeSignup = (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, office, faculty, job) => {
     return dispatch => {
         dispatch(authLoginUserRequest())
         axios
-            .post('/rest-auth/registration/', {
+            .post('/api-authentication/employee-registration', {
+                username: username,
                 email: email,
                 password1: password1,
-                password2: password2
+                password2: password2,
+                last_name: last_name,
+                first_name: first_name,
+                birth_date: birth_date,
+                home_phone_number: home_phone_number,
+                mobile_phone_number: mobile_phone_number,
+                office: office,
+                job: job,
+                faculty: faculty
+            })
+            .then(res => {
+                const token = res.data.key
+                const user = res.data.user
+                const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
+                localStorage.setItem('token', token)
+                localStorage.setItem('user', user)
+                localStorage.setItem('expirationDate', expirationDate)
+                dispatch(authLoginUserSuccess(token, user))
+                dispatch(checkAuthTimeout(3600))
+            })
+            .catch(err => {
+                dispatch(authLoginUserFailure(401, err))
+            })
+    }
+}
+
+export const authStudentSignup = (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty) => {
+    return dispatch => {
+        dispatch(authLoginUserRequest())
+        axios
+            .post('/api-authentication/student-registration', {
+                username: username,
+                email: email,
+                password1: password1,
+                password2: password2,
+                last_name: last_name,
+                first_name: first_name,
+                birth_date: birth_date,
+                home_phone_number: home_phone_number,
+                mobile_phone_number: mobile_phone_number,
+                year: year,
+                cursus: cursus,
+                faculty: faculty
+            })
+            .then(res => {
+                const token = res.data.key
+                const user = res.data.user
+                const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
+                localStorage.setItem('token', token)
+                localStorage.setItem('user', user)
+                localStorage.setItem('expirationDate', expirationDate)
+                dispatch(authLoginUserSuccess(token, user))
+                dispatch(checkAuthTimeout(3600))
+            })
+            .catch(err => {
+                dispatch(authLoginUserFailure(401, err))
+            })
+    }
+}
+
+export const authEnterpriseSignup = (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, logo, office, company_url, address, description) => {
+    return dispatch => {
+        dispatch(authLoginUserRequest())
+        axios
+            .post('/api-authentication/enterprise-registration', {
+                username: username,
+                email: email,
+                password1: password1,
+                password2: password2,
+                last_name: last_name,
+                first_name: first_name,
+                birth_date: birth_date,
+                home_phone_number: home_phone_number,
+                mobile_phone_number: mobile_phone_number,
+                logo: logo,
+                office: office,
+                company_url: company_url,
+                address: address,
+                description: description
             })
             .then(res => {
                 const token = res.data.key

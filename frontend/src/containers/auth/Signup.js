@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { authSignup, resetAuthLoginUserFailure } from '../../store/actions/auth';
+import { authStudentSignup, authEmployeeSignup, authEnterpriseSignup, resetAuthLoginUserFailure } from '../../store/actions/auth';
 
 class RegistrationForm extends Component {
 
@@ -20,7 +20,7 @@ class RegistrationForm extends Component {
     handleSubmit = e => {
       e.preventDefault()
       const { email, password1, password2 } = this.state
-      this.props.signup(email, password1, password2)
+      this.props.signupStudent(email, password1, password2)
     }
 
     componentWillUnmount() {
@@ -103,7 +103,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signup: (email, password1, password2) => dispatch(authSignup(email, password1, password2)),
+    signupStudent: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty) => dispatch(authStudentSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty)),
+    
+    signupEmployee: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, office, faculty, job) => dispatch(authEmployeeSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, office, faculty, job)),
+    
+    signupEnterprise: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, logo, office, company_url, address, description) => dispatch(authEnterpriseSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, logo, office, company_url, address, description)),
     reset: () => dispatch(resetAuthLoginUserFailure())
   }
 }

@@ -5,14 +5,24 @@ import * as authActions from '../../store/actions/auth';
 
 class CustomLayout extends Component {
   
+  state = {
+    theme: 'light-theme'
+  }
+
+  toggleThemes = () => {
+    const { theme } = this.state;
+    return (theme === 'light-theme') ? this.setState({'theme': 'dark-theme'}) : this.setState({'theme': 'light-theme'});
+  }
+  
   renderCopyright = () => {
     const copyright = new Date().getFullYear();
     return {__html: `&copy; ${copyright} Dopejob`};
   }
   render() {
       const { isAuthenticated, children, location: { pathname } } = this.props;
+      const { theme } = this.state;
       return (
-        <div>
+        <div id="app" className={theme}>
           { (pathname).includes('login') || (pathname).includes('signup') ?
           <div></div> :
           <nav className="navbar">
@@ -54,6 +64,7 @@ class CustomLayout extends Component {
           {children}
           <footer className="footer">
             <ul>
+              <li><button onClick={this.toggleThemes}>Theme</button></li>
               <li className="fl-l" dangerouslySetInnerHTML={this.renderCopyright()}></li>
               <li className="fl-l"><Link to="/legal" className="link">Politique relative aux cookies, politique de confidentialité et conditions d'utilisation</Link></li>
             </ul>

@@ -3,9 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 
 import Login from './containers/auth/Login';
 import RegistrationForm from './containers/auth/Signup';
-// import Profile from './containers/dashboard/profile/Profile';
-// import Annonces from './containers/dashboard/annonces/Annonces';
-// import Notifications from './containers/dashboard/notifications/Notifications';
 import Account from './containers/dashboard/Account';
 import Search from './containers/search/Search';
 import StaticPage from './containers/static-pages/StaticPage';

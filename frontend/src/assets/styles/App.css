@@ -1,3 +1,12 @@
+.light-theme {
+  --primary-color: #007bff;
+  --disabled-color: #6c757d;
+}
+.dark-theme {
+  --primary-color: #000000;
+  --disabled-color: #4a4a4b;
+}
+
 .footer ul {
   list-style-type: none;
   margin: 0;
@@ -8,7 +17,7 @@
 
 .navbar .navbar__link {
   display: inline-block;
-  color: #282c34;
+  color: var(--primary-color);
   font-size: 1rem;
   text-align: center;
   padding: 14px 16px;
@@ -16,7 +25,7 @@
 }
 
 .navbar .navbar__link--active {
-  border-bottom: 2px solid #61dafb;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .fl-l {
@@ -28,7 +37,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--primary-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,5 +48,5 @@
 }
 
 .link {
-  color: #61dafb;
+  color: var(--primary-color);
 }
