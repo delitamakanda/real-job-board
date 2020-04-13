@@ -67,7 +67,6 @@ class User(AbstractBaseUser):
     home_phone_number = models.CharField(max_length=20, blank=True)
     mobile_phone_number = models.CharField(max_length=30, blank=True)
     network = models.ManyToManyField('self')
-    # faculty = models.ForeignKey('Faculty', on_delete=models.CASCADE, blank=True, null=True)
     user_type = 'generic'
     username = models.CharField(
         verbose_name='username',
@@ -201,7 +200,7 @@ class Notification(models.Model, ContentTypeToGetModel):
 
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     color = models.CharField(max_length=10)
 
     class Meta:
@@ -225,14 +224,14 @@ class Campus(models.Model):
 
 
 class Job(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
 
     def __str__(self):
         return 'Job Title: {}'.format(self.title)
 
 
 class Cursus(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
 
     class Meta:
         verbose_name = 'Cursus'
@@ -244,8 +243,8 @@ class Cursus(models.Model):
 
 class Employee(User):
     office = models.CharField(max_length=30)
-    faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, blank=True, null=True)
-    job = models.ForeignKey(Job, on_delete=models.SET_NULL, blank=True, null=True)
+    faculty = models.ForeignKey('Faculty', on_delete=models.CASCADE, blank=True, null=True)
+    job = models.ForeignKey('Job', on_delete=models.CASCADE, blank=True, null=True)
     user_type = 'employee'
 
     def __str__(self):
@@ -253,8 +252,8 @@ class Employee(User):
 
 
 class Student(User):
-    cursus = models.ForeignKey(Cursus, on_delete=models.SET_NULL, blank=True, null=True)
-    faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, blank=True, null=True)
+    cursus = models.ForeignKey('Cursus', on_delete=models.CASCADE, blank=True, null=True)
+    faculty = models.ForeignKey('Faculty', on_delete=models.CASCADE, blank=True, null=True)
     user_type = 'student'
     year = models.IntegerField()
 
