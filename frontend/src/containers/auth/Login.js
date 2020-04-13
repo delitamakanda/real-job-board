@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { push } from 'react-router-redux';
+import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import { authLoginUser, resetAuthLoginUserFailure } from '../../store/actions/auth';
 
@@ -13,14 +12,11 @@ class Login extends Component {
     }
 
     UNSAFE_componentWillMount() {
-      if (this.props.isAuthenticated) {
-          this.props.dispatch(push('/mon-compte/profil'));
+      if (!this.props.isAuthenticated) {
+        this.props.reset()
       }
     }
 
-    componentWillUnmount() {
-      this.props.reset()
-    }
 
     handleChange = e => {
       this.setState({ [e.target.name]: e.target.value })
@@ -42,6 +38,10 @@ class Login extends Component {
             'alert-danger': this.props.statusText.indexOf('Authentication Error') === 0,
             'alert-success': this.props.statusText.indexOf('Authentication Error') !== 0
         });
+
+        if (isAuthenticated) {
+          return <Redirect to="/mon-compte/profil" />
+        }
 
         statusText = (
             <div className="row">
@@ -99,7 +99,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      login: (username, password) => dispatch(authLoginUser(username, password, '/mon-compte/profil')),
+      login: (username, password) => dispatch(authLoginUser(username, password)),
       reset: () => dispatch(resetAuthLoginUserFailure())
   }
 }

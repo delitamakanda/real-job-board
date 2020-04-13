@@ -12,7 +12,6 @@ import { updateObject } from '../utility'
 
 const initialState = {
     token: null,
-    userName: null,
     isAuthenticated: false,
     isAuthenticating: false,
     statusText: null,
@@ -33,7 +32,6 @@ export default function authReducer(state = initialState, action) {
                 isAuthenticating: false,
                 isAuthenticated: true,
                 token: action.payload.token,
-                userName: action.payload.user.email,
                 statusText: 'You have been successfully logged in.',
                 loading: false
             });
@@ -43,7 +41,6 @@ export default function authReducer(state = initialState, action) {
                 isAuthenticating: false,
                 isAuthenticated: false,
                 token: null,
-                userName: null,
                 statusText: `Authentication Error: ${action.payload.status} - ${action.payload.statusText}`,
                 loading: false
             });
@@ -51,14 +48,12 @@ export default function authReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 isAuthenticated: false,
                 token: null,
-                userName: null,
                 statusText: null
             });
         case AUTH_LOGOUT_USER:
             return Object.assign({}, state, {
                 isAuthenticated: false,
                 token: null,
-                userName: null,
                 statusText: 'You have been successfully logged out.'
             });
 

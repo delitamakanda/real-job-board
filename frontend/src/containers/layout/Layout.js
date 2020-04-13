@@ -18,6 +18,12 @@ class CustomLayout extends Component {
     const copyright = new Date().getFullYear();
     return {__html: `&copy; ${copyright} Dopejob`};
   }
+
+  disconnect = () => {
+    this.props.logout();
+    this.props.history.push('/');
+  }
+
   render() {
       const { isAuthenticated, children, location: { pathname } } = this.props;
       const { theme } = this.state;
@@ -59,6 +65,13 @@ class CustomLayout extends Component {
                 Se connecter
               </NavLink>
               }
+              {isAuthenticated ?
+              <button 
+                onClick={this.disconnect}
+                className="navbar__link fl-r">Se déconnecter</button>
+              :
+              <div></div>
+              }
           </nav>
           }
           {children}
@@ -74,16 +87,9 @@ class CustomLayout extends Component {
   }
 }
 
-/*
-
-© 2020 Indeed
-Centre de confidentialité
-
-*/
-
 const mapStateToProps = state => {
   return {
-    isAuthenticathed: !!state.auth.isAuthenticathed
+    isAuthenticated: !!state.auth.isAuthenticated
   }
 }
 

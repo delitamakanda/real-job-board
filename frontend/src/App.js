@@ -10,6 +10,10 @@ import './assets/styles/App.css';
 
 class App extends Component {
 
+  componentDidMount() {
+    this.props.onTryAutoSignup()
+  }
+
   render() {
     return (
       <Router>
@@ -23,7 +27,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-      isAuthenticathed: !!state.auth.isAuthenticated
+    isAuthenticated: !!state.auth.token
   }
 }
 

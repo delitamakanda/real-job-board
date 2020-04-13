@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { push } from 'react-router-redux';
+// eslint-disable-next-line
 import { checkHttpStatus, parseJSON } from '../../utils';
 import {
     AUTH_LOGIN_USER_REQUEST,
@@ -9,16 +10,25 @@ import {
     RESET_AUTH_LOGIN_USER_FAILURE
 } from '../constants';
 
-export function authLoginUserSuccess(token, user) {
+export function authLoginUserSuccess(token) {
+    console.log(token)
     localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+    localStorage.setItem('expirationDate', expirationDate);
     return {
         type: AUTH_LOGIN_USER_SUCCESS,
         payload: {
             token,
-            user
         }
     };
+}
+
+export const checkAuthTimeout = expirationTime => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(authLogout())
+        }, expirationTime * 1000)
+    }
 }
 
 export function resetAuthLoginUserFailure() {
@@ -29,6 +39,7 @@ export function resetAuthLoginUserFailure() {
 
 export function authLoginUserFailure(error, message) {
     localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
     return {
         type: AUTH_LOGIN_USER_FAILURE,
         payload: {
@@ -46,19 +57,10 @@ export function authLoginUserRequest() {
 
 export function authLogout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
     localStorage.removeItem('expirationDate')
     return {
         type: AUTH_LOGOUT_USER
     };
-}
-
-export const checkAuthTimeout = expirationTime => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(authLogout())
-        }, expirationTime * 1000)
-    }
 }
 
 export function authLogoutAndRedirect() {
@@ -69,7 +71,7 @@ export function authLogoutAndRedirect() {
     };
 }
 
-export function authLoginUser(username, password, redirect = '/') {
+export function authLoginUser(username, password) {
     return (dispatch) => {
         dispatch(authLoginUserRequest());
         axios
@@ -78,10 +80,10 @@ export function authLoginUser(username, password, redirect = '/') {
                 password: password
             })
             .then(checkHttpStatus)
-            .then(parseJSON)
+            // .then(parseJSON)
             .then(response => {
-                dispatch(authLoginUserSuccess(response.token, response.user));
-                dispatch(push(redirect));
+                dispatch(authLoginUserSuccess(response.data.key));
+                dispatch(checkAuthTimeout(3600));
             })
             .catch((error) => {
                 if (error && typeof error.response !== 'undefined' && error.response.status === 401) {
@@ -121,13 +123,7 @@ export const authEmployeeSignup = (username, email, password1, password2, last_n
                 faculty: faculty
             })
             .then(res => {
-                const token = res.data.key
-                const user = res.data.user
-                const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
-                localStorage.setItem('token', token)
-                localStorage.setItem('user', user)
-                localStorage.setItem('expirationDate', expirationDate)
-                dispatch(authLoginUserSuccess(token, user))
+                dispatch(authLoginUserSuccess(res.data.key));
                 dispatch(checkAuthTimeout(3600))
             })
             .catch(err => {
@@ -155,13 +151,7 @@ export const authStudentSignup = (username, email, password1, password2, last_na
                 faculty: faculty
             })
             .then(res => {
-                const token = res.data.key
-                const user = res.data.user
-                const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
-                localStorage.setItem('token', token)
-                localStorage.setItem('user', user)
-                localStorage.setItem('expirationDate', expirationDate)
-                dispatch(authLoginUserSuccess(token, user))
+                dispatch(authLoginUserSuccess(res.data.key));
                 dispatch(checkAuthTimeout(3600))
             })
             .catch(err => {
@@ -191,13 +181,7 @@ export const authEnterpriseSignup = (username, email, password1, password2, last
                 description: description
             })
             .then(res => {
-                const token = res.data.key
-                const user = res.data.user
-                const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
-                localStorage.setItem('token', token)
-                localStorage.setItem('user', user)
-                localStorage.setItem('expirationDate', expirationDate)
-                dispatch(authLoginUserSuccess(token, user))
+                dispatch(authLoginUserSuccess(res.data.key));
                 dispatch(checkAuthTimeout(3600))
             })
             .catch(err => {

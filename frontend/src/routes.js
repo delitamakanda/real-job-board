@@ -7,6 +7,7 @@ import Account from './containers/dashboard/Account';
 import Search from './containers/search/Search';
 import StaticPage from './containers/static-pages/StaticPage';
 import StaticPageDetail from './containers/static-pages/StaticPageDetail';
+import NoMatchPage from './containers/no-match/NoMatch';
 
 const BaseRouter = () => (
     <Switch>
@@ -16,6 +17,7 @@ const BaseRouter = () => (
         <Route exact path="/legal/:slug" component={StaticPageDetail} />
         <Route path="/mon-compte" component={Account} />
         <Route exact path="/" component={Search} />
+        <Route path="*" component={NoMatchPage} />          
     </Switch>
 )
 
