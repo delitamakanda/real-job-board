@@ -44,19 +44,6 @@ Run local server
 python3 manage.py runserver
 ```
 
-
-
-## Resources useful
-- [gitlab](https://gitlab.com/georgedorn/django-python-job-board/blob/master/python_job_board/models.py)
-- [Django Girls](https://tutorial.djangogirls.org/fr/)
-- [Django Girls: extensions](https://tutorial-extensions.djangogirls.org/en/)
-- [Flutter Sidebar & Dashboard](https://youtu.be/VzuHfHyJcuI)
-- [Flutter Routing](https://www.youtube.com/watch?v=JWuXj0BY_s4)
-- [Flutter multi page applications](https://proandroiddev.com/flutter-creating-multi-page-application-with-navigation-ef9f4a72d181)
-- [Flutter icons](https://api.flutter.dev/flutter/material/Icons-class.html)
-- [Flutter Django Search](https://medium.com/flutter-community/django-search-flutter-1cb3e8a5db1a)
-
-
 # commands
 ```
 python3 manage.py import_job_title_from_onisep_as_xml
