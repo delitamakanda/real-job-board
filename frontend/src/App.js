@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import CustomLayout from './containers/layout/Layout';
-import BaseRouter from './routes'
+import BaseRouter from './routes';
+// import './assets/styles/index.css';
+import { ThemeProvider, CssBaseline } from "@material-ui/core";
+import { Global, css } from "@emotion/core";
+import { theme, modalPopperAutocompleteModalIndex } from "./constants";
+import { FOCUS_BOX_SHADOW } from './utils/colors';
 
 import * as authActions from './store/actions/auth';
 
-import './assets/styles/App.css';
+// import './assets/styles/App.css';
 
 class App extends Component {
 
@@ -17,9 +22,25 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <CustomLayout {...this.props}>
-          <BaseRouter />
-        </CustomLayout>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Global
+            styles={css`
+              .Mui-focusVisible {
+                box-shadow: 0 0 3px 2px ${FOCUS_BOX_SHADOW};
+              }
+              textarea {
+                font-family: inherit;
+              }
+              .MuiAutocomplete-popper {
+                z-index: ${modalPopperAutocompleteModalIndex} !important;
+              }
+            `}
+          />
+          <CustomLayout {...this.props}>
+            <BaseRouter />
+          </CustomLayout>
+        </ThemeProvider>
       </Router>
     )
   }
@@ -33,7 +54,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      onTryAutoSignup: () => dispatch(authActions.authCheckState())
+    onTryAutoSignup: () => dispatch(authActions.authCheckState())
   }
 }
 
