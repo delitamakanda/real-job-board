@@ -13,15 +13,11 @@
     {% render_bundle 'main' 'css' %}
   </head>
 
-<body>
-    <div id="{% block bodyId %}genericPage{% endblock %}" class="body">
-        <div class="container">
-            {% block content %}{% endblock %}
-        </div>
-    </div>
-    {% render_bundle 'main' 'js' %}
-    {% render_bundle 'runtime-main' 'js' %}
-    {% render_bundle 'vendors' 'js' %}
+<body id="{% block bodyId %}genericPage{% endblock %}">
+  {% block content %}{% endblock %}
+  {% render_bundle 'main' 'js' %}
+  {% render_bundle 'runtime-main' 'js' %}
+  {% render_bundle 'vendors' 'js' %}
 </body>
 
 </html>
