@@ -40,7 +40,7 @@ class Login extends Component {
         });
 
         if (isAuthenticated) {
-          return <Redirect to="/mon-compte/profil" />
+          return <Redirect to="/" />
         }
 
         statusText = (

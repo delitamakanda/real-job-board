@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { authStudentSignup, authEmployeeSignup, authEnterpriseSignup, resetAuthLoginUserFailure } from '../../store/actions/auth';
 
@@ -22,8 +22,8 @@ class RegistrationForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { email, password1, password2 } = this.state
-    this.props.signupStudent(email, password1, password2)
+    // const { email, password1, password2 } = this.state
+    // this.props.signupStudent(email, password1, password2)
   }
 
   componentWillUnmount() {
@@ -31,82 +31,45 @@ class RegistrationForm extends Component {
   }
 
   render() {
-    const { loading } = this.props;
-    const { email, password1, password2 } = this.state
-    let statusText = null;
+    let statusTextClassNames = null;
     if (this.props.statusText) {
-      const statusTextClassNames = classNames({
+      statusTextClassNames = classNames({
         'alert': true,
         'alert-danger': this.props.statusText.indexOf('Authentication Error') === 0,
         'alert-success': this.props.statusText.indexOf('Authentication Error') !== 0
       });
-
-      statusText = (
-        <div className="row">
-          <div className="col-sm-12">
-            <div className={statusTextClassNames}>
-              {this.props.statusText}
-            </div>
+    }
+    const statusText = (
+      <div className="row">
+        <div className="col-sm-12">
+          <div className={statusTextClassNames}>
+            {this.props.statusText}
           </div>
         </div>
-      );
-    }
+      </div>
+
+    )
     return (
       <div className="container signup">
-      <h1>Créer un compte gratuitement</h1>
-      <Tabs>
-        <TabList>
-          <Tab>Etudiant</Tab>
-          <Tab>Employé</Tab>
-          <Tab>Entreprise</Tab>
-        </TabList>
+        <h1>Créer un compte gratuitement</h1>
+        <Tabs>
+          <TabList>
+            <Tab>Etudiant</Tab>
+            <Tab>Employé</Tab>
+            <Tab>Entreprise</Tab>
+          </TabList>
 
-        <TabPanel>
-          <h2>Any content 1</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Any content 2</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Any content 3</h2>
-            <div>
-              {statusText}
-              <form onSubmit={this.handleSubmit}>
-                <input type="email"
-                  onChange={this.handleChange}
-                  value={email}
-                  name="email"
-                  placeholder="E-mail"
-                />
-                <input type="password"
-                  onChange={this.handleChange}
-                  value={password1}
-                  placeholder="Mot de passe"
-                  name="password1"
-                />
-                <input type="password"
-                  onChange={this.handleChange}
-                  value={password2}
-                  placeholder="Confirmer mot de passe"
-                  name="password2"
-                />
-
-                <button type="submit"
-                  loading={loading.toString()}
-                  disabled={loading}
-                >
-                  Connexion
-                  </button>
-              </form>
-              <div>
-                Vous avez un compte ? <Link to="/login">Connectez-vous</Link>
-              </div>
-              <div>
-                <Link to="/">Mot de passe oublié ?</Link>
-              </div>
-            </div>
-        </TabPanel>
-      </Tabs>
+          <TabPanel>
+            <h2>Any content 1</h2>
+          </TabPanel>
+          <TabPanel>
+            <h2>Any content 2</h2>
+          </TabPanel>
+          <TabPanel>
+            <h2>Any content 3</h2>
+          </TabPanel>
+        </Tabs>
+        {statusText}
       </div>
     )
     /* return (
