@@ -27,3 +27,16 @@
 - [Flutter multi page applications](https://proandroiddev.com/flutter-creating-multi-page-application-with-navigation-ef9f4a72d181)
 - [Flutter icons](https://api.flutter.dev/flutter/material/Icons-class.html)
 - [Flutter Django Search](https://medium.com/flutter-community/django-search-flutter-1cb3e8a5db1a)
+
+
+1. https://github.com/22mahmoud/faven
+2. https://github.com/themesberg/volt-bootstrap-5-dashboard
+3. https://www.smashingmagazine.com/2020/08/comment-system-firebase/
+4. https://github.com/sanusart/react-dropdown-select
+5. https://www.youtube.com/watch?v=s9K7el0LTIA
+
+6. https://github.com/facebook/draft-js
+7. https://codesource.io/build-a-tik-tok-clone-with-react-and-firebase/
+8. https://www.smashingmagazine.com/2020/09/component-library-react-emotion/
+9. https://github.com/yjose/reactjs-popup
+10. https://github.com/rrebase/knboard
