@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Menu, MenuItem, Avatar } from "@material-ui/core";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { avatarStyles } from "../styles";
 import { useHistory } from "react-router-dom";
 import * as authActions from '../store/actions/auth';
