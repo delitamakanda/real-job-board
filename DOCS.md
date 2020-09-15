@@ -22,12 +22,7 @@
 - [gitlab](https://gitlab.com/georgedorn/django-python-job-board/blob/master/python_job_board/models.py)
 - [Django Girls](https://tutorial.djangogirls.org/fr/)
 - [Django Girls: extensions](https://tutorial-extensions.djangogirls.org/en/)
-- [Flutter Sidebar & Dashboard](https://youtu.be/VzuHfHyJcuI)
-- [Flutter Routing](https://www.youtube.com/watch?v=JWuXj0BY_s4)
-- [Flutter multi page applications](https://proandroiddev.com/flutter-creating-multi-page-application-with-navigation-ef9f4a72d181)
-- [Flutter icons](https://api.flutter.dev/flutter/material/Icons-class.html)
 - [Flutter Django Search](https://medium.com/flutter-community/django-search-flutter-1cb3e8a5db1a)
-
 
 1. https://github.com/22mahmoud/faven
 2. https://github.com/themesberg/volt-bootstrap-5-dashboard
@@ -40,3 +35,4 @@
 8. https://www.smashingmagazine.com/2020/09/component-library-react-emotion/
 9. https://github.com/yjose/reactjs-popup
 10. https://github.com/rrebase/knboard
+11. http://engineering.hackerearth.com/2020/07/17/how-i-built-my-first-search-component/
