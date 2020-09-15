@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Annonces extends Component {
-    render() {
-      return (
-        <div>
-          <h1>Vos Annonces</h1>
-        </div>
-      )
-    }
-  };
-  
-  export default Annonces;
+const Annonces = () => {
+  return (
+    <div>
+      <h1>Vos Annonces</h1>
+    </div>
+  )
+};
+
+export default Annonces;
