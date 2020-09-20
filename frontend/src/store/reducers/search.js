@@ -26,21 +26,18 @@ export default function searchReducer(state = initialState, action) {
         case SEARCH_SET:
             return Object.assign({}, state, {
                 data: action.payload.data,
-                loading: false,
-                is_load_more_visible: action.payload.isLoadMoreVisible
+                loading: false
             });
 
         case SEARCH_APPEND:
             return Object.assign({}, state, {
                 data: state.data.concat(action.payload.data),
-                loading: false,
-                is_load_more_visible: action.payload.isLoadMoreVisible
+                loading: false
             });
 
         case SEARCH_LOADER_STATE:
             return Object.assign({}, state, {
-                loading: true,
-                is_load_more_visible: action.payload.isLoadMoreVisible
+                loading: true
             });
 
         case SEARCH_RESET:
