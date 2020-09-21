@@ -6,11 +6,14 @@ import SearchResults from './SearchResults';
 class Search extends Component {
 
   render() {
+    const { search } = this.props;
     return (
       <div>
         <h2>Search</h2>
-        <SearchInput />
-        <SearchResults show={true} />
+        <div>
+          <SearchInput />
+        </div>
+        <SearchResults show={search.input_value.length > 2} />
       </div>
     );
   }

@@ -39,14 +39,19 @@ export function showMobileSearch(e) {
     };
 }
 
+export function onChangeSearch(inputValue) {
+    console.log(inputValue)
+    return {
+        type: SEARCH_TEXT_CHANGE,
+        payload: {
+            input_value: inputValue
+        }
+    }
+}
+
 export function searchTextChange(inputValue, shouldCallApi) {
     return dispatch => {
-        dispatch({
-            type: SEARCH_TEXT_CHANGE,
-            payload: {
-                input_value: inputValue
-            }
-        })
+        dispatch(onChangeSearch(inputValue))
         if (shouldCallApi && inputValue.length > 2) {
             axios
                 .get(`/api-job/annonce/?q=${inputValue}`)
@@ -62,21 +67,16 @@ export function searchTextChange(inputValue, shouldCallApi) {
 
 export function loadSearchResults(inputValue) {
     return dispatch => {
-      dispatch({
-        type: SEARCH_TEXT_CHANGE,
-        payload: {
-            input_value: inputValue
+        dispatch(onChangeSearch(inputValue))
+
+        if (inputValue.length > 2) {
+            axios.get(`/api-job/annonce/?q=${inputValue}`)
+                .then(response => {
+                    dispatch(loadSearchResultsSuccess(response.data));
+                })
+                .catch(error => {
+                    dispatch(loadSearchResultsFail(error));
+                });
         }
-      });
-  
-      if (inputValue.length > 2) {
-        axios.get(`/api-job/annonce/?q=${inputValue}`)
-          .then(response => {
-            dispatch(loadSearchResultsSuccess(response.data));
-          })
-          .catch(error => {
-              dispatch(loadSearchResultsFail(error));
-          });
-      }
     };
-  }
+}

@@ -15,12 +15,12 @@ const initialState = {
     data: []
 };
 
-export default function searchReducer(state = initialState, action) {
+export default function searchReducer(state = initialState, action = {}) {
     switch (action.type) {
         case SEARCH_TEXT_CHANGE:
             return Object.assign({}, state, {
                 loading: true,
-                input_value: action.payload.inputValue
+                input_value: action.payload.input_value
             });
 
         case SEARCH_SET:
@@ -44,7 +44,7 @@ export default function searchReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 ...initialState,
                 show_mobile_search: false,
-                input_value: action.payload.inputValue
+                input_value: action.payload.input_value
             });
 
         case SEARCH_MOBILE_OPEN:

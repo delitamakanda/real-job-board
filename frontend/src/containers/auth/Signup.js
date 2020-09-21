@@ -1,100 +1,145 @@
-import React, { Component } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import { authStudentSignup, authEmployeeSignup, authEnterpriseSignup, resetAuthLoginUserFailure } from '../../store/actions/auth';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
-import 'react-tabs/style/react-tabs.css';
+const images = [
+  {
+    url: require('../../assets/images/student.jpg'),
+    title: 'Student',
+    width: '100%',
+    link: '/s/student'
+  },
+  {
+    url: require('../../assets/images/employee.jpg'),
+    title: 'Employee',
+    width: '100%',
+    link: '/s/employee'
+  },
+  {
+    url: require('../../assets/images/enterprise.jpg'),
+    title: 'Enterprise',
+    width: '100%',
+    link: '/s/enterprise'
+  },
+];
 
-class RegistrationForm extends Component {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    minWidth: 300,
+    width: '100%',
+  },
+  image: {
+    position: 'relative',
+    height: 200,
+    [theme.breakpoints.down('xs')]: {
+      width: '100% !important', // Overrides inline-style
+      height: 100,
+    },
+    '&:hover, &$focusVisible': {
+      zIndex: 1,
+      '& $imageBackdrop': {
+        opacity: 0.15,
+      },
+      '& $imageMarked': {
+        opacity: 0,
+      },
+      '& $imageTitle': {
+        border: '4px solid currentColor',
+      },
+    },
+  },
+  focusVisible: {},
+  imageButton: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: theme.palette.common.white,
+  },
+  imageSrc: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center 40%',
+  },
+  imageBackdrop: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: theme.palette.common.black,
+    opacity: 0.4,
+    transition: theme.transitions.create('opacity'),
+  },
+  imageTitle: {
+    position: 'relative',
+    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
+  },
+  imageMarked: {
+    height: 3,
+    width: 18,
+    backgroundColor: theme.palette.common.white,
+    position: 'absolute',
+    bottom: -2,
+    left: 'calc(50% - 9px)',
+    transition: theme.transitions.create('opacity'),
+  },
+}));
 
-  state = {
-    email: '',
-    password1: '',
-    password2: ''
-  }
+const RegistrationForm = () => {
+  const classes = useStyles();
+  // const preventDefault = (event) => event.preventDefault();
 
+  return (
+    <div className={"container signup" + classes.root}>
+      <h1>Créer un compte gratuitement</h1>
+      {images.map((image) => (
+        <Link to={image.link}>
+          <ButtonBase
+            focusRipple
+            key={image.title}
+            className={classes.image}
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  handleSubmit = e => {
-    e.preventDefault()
-    // const { email, password1, password2 } = this.state
-    // this.props.signupStudent(email, password1, password2)
-  }
-
-  componentWillUnmount() {
-    this.props.reset()
-  }
-
-  render() {
-    let statusTextClassNames = null;
-    if (this.props.statusText) {
-      statusTextClassNames = classNames({
-        'alert': true,
-        'alert-danger': this.props.statusText.indexOf('Authentication Error') === 0,
-        'alert-success': this.props.statusText.indexOf('Authentication Error') !== 0
-      });
-    }
-    const statusText = (
-      <div className="row">
-        <div className="col-sm-12">
-          <div className={statusTextClassNames}>
-            {this.props.statusText}
-          </div>
-        </div>
-      </div>
-
-    )
-    return (
-      <div className="container signup">
-        <h1>Créer un compte gratuitement</h1>
-        <Tabs>
-          <TabList>
-            <Tab>Etudiant</Tab>
-            <Tab>Employé</Tab>
-            <Tab>Entreprise</Tab>
-          </TabList>
-
-          <TabPanel>
-            <h2>Any content 1</h2>
-          </TabPanel>
-          <TabPanel>
-            <h2>Any content 2</h2>
-          </TabPanel>
-          <TabPanel>
-            <h2>Any content 3</h2>
-          </TabPanel>
-        </Tabs>
-        {statusText}
-      </div>
-    )
-    /* return (
-    ) */
-  }
+            focusVisibleClassName={classes.focusVisible}
+            style={{
+              width: image.width
+            }}
+          >
+            <span
+              className={classes.imageSrc}
+              style={{
+                backgroundImage: `url(${image.url})`,
+              }}
+            />
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                color="inherit"
+                className={classes.imageTitle}
+              >
+                {image.title}
+                <span className={classes.imageMarked} />
+              </Typography>
+            </span>
+          </ButtonBase>
+        </Link>
+      ))}
+    </div>
+  )
 }
 
-const mapStateToProps = state => {
-  return {
-    loading: state.auth.loading,
-    isAuthenticated: state.auth.isAuthenticated,
-    isAuthenticating: state.auth.isAuthenticating,
-    statusText: state.auth.statusText
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    signupStudent: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty) => dispatch(authStudentSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty)),
-
-    signupEmployee: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, office, faculty, job) => dispatch(authEmployeeSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, office, faculty, job)),
-
-    signupEnterprise: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, logo, office, company_url, address, description) => dispatch(authEnterpriseSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, logo, office, company_url, address, description)),
-    reset: () => dispatch(resetAuthLoginUserFailure())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
+export default RegistrationForm;
