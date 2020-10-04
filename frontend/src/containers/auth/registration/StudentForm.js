@@ -1,29 +1,235 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { authStudentSignup, authEmployeeSignup, authEnterpriseSignup, resetAuthLoginUserFailure } from '../../../store/actions/auth';
+import { authStudentSignup, resetAuthLoginUserFailure } from '../../../store/actions/auth';
+// import { authAxios } from '../../../utils';
+import axios from 'axios';
+import { cursusListURL, facultyListURL } from '../../../constants';
+import { makeStyles, InputLabel, FormControl, Input, InputAdornment, IconButton, TextField, MenuItem } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
-import 'react-tabs/style/react-tabs.css';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'column'
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  textField: {
+    width: '100%',
+  },
+}));
+
+const FormStudent = ({ cursus, faculties }) => {
+  const classes = useStyles();
+  const [values, setValues] = React.useState({
+    password: '',
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  return (
+    <form className={classes.root}>
+      <div>
+        <FormControl className={classNames(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-weight">Identifiant</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+          />
+        </FormControl>
+      </div>
+      <div>
+        <FormControl className={classNames(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-weight">E-mail</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+          />
+        </FormControl>
+      </div>
+      <div>
+        <FormControl className={classNames(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-password">Mot de passe</InputLabel>
+          <Input
+            id="standard-adornment-password"
+            type={values.showPassword ? 'text' : 'password'}
+            onChange={handleChange('password')}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </div>
+      <div>
+        <FormControl className={classNames(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-password">Confirmation de mot de passe</InputLabel>
+          <Input
+            id="standard-adornment-password"
+            type='password'
+            onChange={handleChange('password')}
+          />
+        </FormControl>
+      </div>
+      <div>
+        <FormControl className={classNames(classes.margin)}>
+          <InputLabel htmlFor="standard-adornment-weight">Prénom</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+          />
+        </FormControl>
+        <FormControl className={classNames(classes.margin)}>
+          <InputLabel htmlFor="standard-adornment-weight">Nom</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+          />
+        </FormControl>
+        <FormControl className={classNames(classes.margin)}>
+          <InputLabel htmlFor="standard-adornment-weight">Date de Naissance</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+          />
+        </FormControl>
+      </div>
+      <div>
+        <FormControl className={classNames(classes.margin)}>
+          <InputLabel htmlFor="standard-adornment-weight">Mobile</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+          />
+        </FormControl>
+        <FormControl className={classNames(classes.margin)}>
+          <InputLabel htmlFor="standard-adornment-weight">Téléphone</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+          />
+        </FormControl>
+      </div>
+      <div>
+        <FormControl className={classNames(classes.margin)}>
+          <InputLabel htmlFor="standard-adornment-weight">Année</InputLabel>
+          <Input
+            id="standard-adornment-weight"
+            type="number"
+          />
+        </FormControl>
+        <TextField
+          id="filled-select-cursus"
+          select
+          label="Select"
+          onChange={handleChange}
+          helperText="Cursus"
+          variant="filled"
+        >
+          {cursus.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.title}
+            </MenuItem>
+          ))}
+        </TextField>
+      </div>
+    </form>
+  )
+}
 
 class StudentForm extends Component {
 
   state = {
-    email: '',
-    password1: '',
-    password2: ''
+    cursus: [],
+    faculties: [],
+    loading: false,
+    error: null,
+    formData: {
+      username: '',
+      email: '',
+      password1: '',
+      password2: '',
+      last_name: '',
+      first_name: '',
+      birth_date: '',
+      home_phone_number: '',
+      mobile_phone_number: '',
+      year: '',
+      cursus: '',
+      faculty: ''
+    },
+    success: false,
+    saving: false
   }
 
 
+  handleSelectChange = (e, { name, value }) => {
+    const { formData } = this.state
+    const updatedFormData = {
+      ...formData,
+      [name]: value
+    }
+    this.setState({
+      formData: updatedFormData
+    })
+  }
+
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    const { formData } = this.state
+    const updatedFormData = {
+      ...formData,
+      [e.target.name]: e.target.value
+    }
+    this.setState({
+      formData: updatedFormData
+    })
   }
 
   handleSubmit = e => {
+    this.setState({ saving: true });
     e.preventDefault()
     // const { email, password1, password2 } = this.state
     // this.props.signupStudent(email, password1, password2)
+  }
+
+  handleFetchCursus = () => {
+    axios.get(cursusListURL)
+      .then(response => {
+        this.setState({ cursus: response.data })
+      })
+      .catch(error => {
+        this.setState({ error: error })
+      })
+  }
+
+  handleFetchFaculties = () => {
+    axios.get(facultyListURL)
+      .then(response => {
+        this.setState({ faculties: response.data })
+      })
+      .catch(error => {
+        this.setState({ error: error })
+      })
+  }
+
+  componentDidMount() {
+    this.handleFetchCursus();
+    this.handleFetchFaculties();
   }
 
   componentWillUnmount() {
@@ -31,49 +237,13 @@ class StudentForm extends Component {
   }
 
   render() {
-    let statusTextClassNames = null;
-    if (this.props.statusText) {
-      statusTextClassNames = classNames({
-        'alert': true,
-        'alert-danger': this.props.statusText.indexOf('Authentication Error') === 0,
-        'alert-success': this.props.statusText.indexOf('Authentication Error') !== 0
-      });
-    }
-    const statusText = (
-      <div className="row">
-        <div className="col-sm-12">
-          <div className={statusTextClassNames}>
-            {this.props.statusText}
-          </div>
-        </div>
-      </div>
-
-    )
+    const { faculties, cursus /*, formData, error, saving, success*/ } = this.state;
     return (
       <div className="container signup">
-        <h1>Créer un compte gratuitement</h1>
-        <Tabs>
-          <TabList>
-            <Tab>Etudiant</Tab>
-            <Tab>Employé</Tab>
-            <Tab>Entreprise</Tab>
-          </TabList>
-
-          <TabPanel>
-            <h2>Any content 1</h2>
-          </TabPanel>
-          <TabPanel>
-            <h2>Any content 2</h2>
-          </TabPanel>
-          <TabPanel>
-            <h2>Any content 3</h2>
-          </TabPanel>
-        </Tabs>
-        {statusText}
+        <h1>Créer un compte Etudiant gratuitement</h1>
+        <FormStudent cursus={cursus} faculties={faculties} />
       </div>
     )
-    /* return (
-    ) */
   }
 }
 
@@ -89,10 +259,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     signupStudent: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty) => dispatch(authStudentSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty)),
-
-    signupEmployee: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, office, faculty, job) => dispatch(authEmployeeSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, office, faculty, job)),
-
-    signupEnterprise: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, logo, office, company_url, address, description) => dispatch(authEnterpriseSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, logo, office, company_url, address, description)),
     reset: () => dispatch(resetAuthLoginUserFailure())
   }
 }

@@ -105,8 +105,9 @@ const RegistrationForm = () => {
   return (
     <div className={"container signup" + classes.root}>
       <h1>Créer un compte gratuitement</h1>
-      {images.map((image) => (
-        <Link to={image.link}>
+      {images.map((image, idx) => (
+        <Link to={image.link}
+          key={idx}>
           <ButtonBase
             focusRipple
             key={image.title}

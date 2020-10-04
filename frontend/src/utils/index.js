@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import { endpoint } from '../constants';
 
 export function checkHttpStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -15,7 +16,7 @@ export function parseJSON(response) {
 }
 
 export const authAxios = axios.create({
-    baseUrl: '/',
+    baseUrl: endpoint,
     withCredentials: 'true',
     headers: {
         'Accept': 'application/json',
