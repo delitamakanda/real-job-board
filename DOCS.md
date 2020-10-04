@@ -39,3 +39,9 @@
 
 12. https://www.digitalocean.com/community/tutorials/how-to-build-a-photo-search-app-with-react-using-the-unsplash-api
 
+13. https://towardsdatascience.com/creating-react-graphql-serverless-web-application-using-aws-amplify-40e56f25796b
+14. https://www.freecodecamp.org/news/how-to-use-svg-icons-in-react-with-react-icons-and-font-awesome/
+15. https://towardsdatascience.com/reactjs-python-flask-on-heroku-2a308272886a
+16. https://towardsdatascience.com/how-to-build-and-deploy-your-dashboard-with-python-google-sheet-and-vue-js-c34140c1afc8
+
+17. https://material-ui.com/components/autocomplete/#asynchronous-requests
