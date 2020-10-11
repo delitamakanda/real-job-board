@@ -7,19 +7,19 @@ import { Link } from 'react-router-dom';
 const images = [
   {
     url: require('../../assets/images/student.jpg'),
-    title: 'Student',
+    title: 'Etudiant',
     width: '100%',
     link: '/s/student'
   },
   {
     url: require('../../assets/images/employee.jpg'),
-    title: 'Employee',
+    title: 'Employé',
     width: '100%',
     link: '/s/employee'
   },
   {
     url: require('../../assets/images/enterprise.jpg'),
-    title: 'Enterprise',
+    title: 'Entreprise',
     width: '100%',
     link: '/s/enterprise'
   },

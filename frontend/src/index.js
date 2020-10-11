@@ -5,12 +5,18 @@ import { Provider } from 'react-redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
+import { IntlProvider } from 'react-intl';
+import { messages } from './translations';
 
 const store = configureStore();
 
+const locale = 'fr';
+
 const app = (
     <Provider store={store}>
-        <App />
+        <IntlProvider locale={locale} messages={messages[locale]}>
+            <App />
+        </IntlProvider>
     </Provider>
 )
 

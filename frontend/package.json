@@ -59,6 +59,7 @@
     "markdown-it": "^11.0.0",
     "material-ui-popup-state": "^1.6.1",
     "react-images": "^1.1.0",
+    "react-intl": "^5.8.6",
     "react-markdown-editor-lite": "^1.2.2",
     "react-tabs": "^3.1.0",
     "redux-devtools": "^3.5.0",

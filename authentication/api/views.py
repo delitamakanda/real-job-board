@@ -10,6 +10,7 @@ class JobViewSet(viewsets.ModelViewSet):
 
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+    pagination_class = None #FIX
 
 
 
@@ -42,6 +43,7 @@ class FacultyViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = Faculty.objects.all()
     serializer_class = FacultySerializer
+    pagination_class = None # FIX
 
 
 class NotificationViewSet(viewsets.ReadOnlyModelViewSet):

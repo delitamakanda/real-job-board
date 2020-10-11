@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 // import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { authStudentSignup, resetAuthLoginUserFailure } from '../../../store/actions/auth';
+import { authStudentSignup } from '../../../store/actions/auth';
 // import { authAxios } from '../../../utils';
 import axios from 'axios';
 import { cursusListURL, facultyListURL } from '../../../constants';
-import { makeStyles, InputLabel, FormControl, Input, InputAdornment, IconButton, TextField, MenuItem } from '@material-ui/core';
+import { makeStyles, InputLabel, FormControl, Input, InputAdornment, CircularProgress, IconButton, TextField, MenuItem } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,12 +25,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FormStudent = ({ cursus, faculties }) => {
+const FormStudent = ({ cursus }) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
   });
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState([]);
+  const loading = open && options.length === 0;
+
+  useEffect(() => {
+    let active = true;
+
+    if (!loading) {
+      return undefined;
+    }
+
+    (async () => {
+      const response = await fetch(facultyListURL);
+      const faculties = await response.json();
+
+      if (active) {
+        setOptions(Object.keys(faculties).map((key) => faculties[key]));
+      }
+
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [loading]);
+
+  useEffect(() => {
+    if (!open) {
+      setOptions([]);
+    }
+  }, [open]);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -136,7 +169,7 @@ const FormStudent = ({ cursus, faculties }) => {
         <TextField
           id="filled-select-cursus"
           select
-          label="Select"
+          label="Cursus"
           onChange={handleChange}
           helperText="Cursus"
           variant="filled"
@@ -147,6 +180,37 @@ const FormStudent = ({ cursus, faculties }) => {
             </MenuItem>
           ))}
         </TextField>
+        <Autocomplete
+          id="asynchronous-demo"
+          style={{ width: 'auto' }}
+          open={open}
+          onOpen={() => {
+            setOpen(true);
+          }}
+          onClose={() => {
+            setOpen(false);
+          }}
+          getOptionSelected={(option, value) => option.id === value.id}
+          getOptionLabel={(option) => option.name}
+          options={options}
+          loading={loading}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Faculté"
+              variant="outlined"
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <React.Fragment>
+                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                    {params.InputProps.endAdornment}
+                  </React.Fragment>
+                ),
+              }}
+            />
+          )}
+        />
       </div>
     </form>
   )
@@ -156,7 +220,6 @@ class StudentForm extends Component {
 
   state = {
     cursus: [],
-    faculties: [],
     loading: false,
     error: null,
     formData: {
@@ -210,17 +273,7 @@ class StudentForm extends Component {
   handleFetchCursus = () => {
     axios.get(cursusListURL)
       .then(response => {
-        this.setState({ cursus: response.data })
-      })
-      .catch(error => {
-        this.setState({ error: error })
-      })
-  }
-
-  handleFetchFaculties = () => {
-    axios.get(facultyListURL)
-      .then(response => {
-        this.setState({ faculties: response.data })
+        this.setState({ cursus: response.data ? response.data.results : [] })
       })
       .catch(error => {
         this.setState({ error: error })
@@ -229,19 +282,16 @@ class StudentForm extends Component {
 
   componentDidMount() {
     this.handleFetchCursus();
-    this.handleFetchFaculties();
-  }
-
-  componentWillUnmount() {
-    this.props.reset()
   }
 
   render() {
-    const { faculties, cursus /*, formData, error, saving, success*/ } = this.state;
+    const { cursus /*, formData, error, saving, success*/ } = this.state;
+    const name = 'First Name'
     return (
       <div className="container signup">
         <h1>Créer un compte Etudiant gratuitement</h1>
-        <FormStudent cursus={cursus} faculties={faculties} />
+        <FormattedMessage id="greeting" values={{ name }} />
+        <FormStudent cursus={cursus} />
       </div>
     )
   }
@@ -258,8 +308,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signupStudent: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty) => dispatch(authStudentSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty)),
-    reset: () => dispatch(resetAuthLoginUserFailure())
+    signupStudent: (username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty) => dispatch(authStudentSignup(username, email, password1, password2, last_name, first_name, birth_date, home_phone_number, mobile_phone_number, year, cursus, faculty))
   }
 }
 

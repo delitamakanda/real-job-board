@@ -32,7 +32,10 @@ const Main = styled.div`
 `;
 
 const Footer = styled.div`
-  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
   padding-bottom: 1rem;
   width: 100%;
   bottom: 0;

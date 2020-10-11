@@ -15,3 +15,4 @@ class AnnonceViewSet(viewsets.ModelViewSet):
     filterset_class = AnnonceFilter
     search_fields = ['^title', 'language', '^job_description', '^requirements', 'enterprise']
     lookup_field = 'slug'
+    pagination_class = None # FIX
