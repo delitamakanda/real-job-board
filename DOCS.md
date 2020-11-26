@@ -45,3 +45,5 @@
 16. https://towardsdatascience.com/how-to-build-and-deploy-your-dashboard-with-python-google-sheet-and-vue-js-c34140c1afc8
 
 17. https://material-ui.com/components/autocomplete/#asynchronous-requests
+
+18. https://saasitive.com/tutorial/react-authenticated-component/
