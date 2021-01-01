@@ -45,3 +45,13 @@
 16. https://towardsdatascience.com/how-to-build-and-deploy-your-dashboard-with-python-google-sheet-and-vue-js-c34140c1afc8
 
 17. https://material-ui.com/components/autocomplete/#asynchronous-requests
+
+18. https://webup.org/blog/sticky-header-table-with-react-hooks/
+19. https://github.com/LouisBarranqueiro/reapop
+20. https://github.com/cruip/tailwind-landing-page-template/
+
+21. https://medium.com/swlh/how-to-build-awesome-tables-with-react-table-963955fd9262
+22. https://blog.theodo.com/2020/11/react-konva-stickers/
+23. https://chakra-ui.com/
+24. https://slack.engineering/creating-a-react-analytics-logging-library/
+24. https://css-tricks.com/creating-ui-components-in-svg/
