@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
 
 const images = [
   {
@@ -100,45 +101,57 @@ const useStyles = makeStyles((theme) => ({
 
 const RegistrationForm = () => {
   const classes = useStyles();
-  // const preventDefault = (event) => event.preventDefault();
 
   return (
-    <div className={"container signup" + classes.root}>
-      <h1>Créer un compte gratuitement</h1>
-      {images.map((image, idx) => (
-        <Link to={image.link}
-          key={idx}>
-          <ButtonBase
-            focusRipple
-            key={image.title}
-            className={classes.image}
+    <div className="flex flex-col min-h-screen overflow-hidden">
+      <Header />
+      <main className="flex-grow">
+        <section className="bg-gradient-to-b from-gray-100 to-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+              <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                <h1 className="h1">Bienvenue. Créer un compte gratuitement.</h1>
+              </div>
+              <div className={"container signup" + classes.root}>
+                {images.map((image, idx) => (
+                  <Link to={image.link}
+                    key={idx}>
+                    <ButtonBase
+                      focusRipple
+                      key={image.title}
+                      className={classes.image}
 
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-              width: image.width
-            }}
-          >
-            <span
-              className={classes.imageSrc}
-              style={{
-                backgroundImage: `url(${image.url})`,
-              }}
-            />
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-              <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={classes.imageTitle}
-              >
-                {image.title}
-                <span className={classes.imageMarked} />
-              </Typography>
-            </span>
-          </ButtonBase>
-        </Link>
-      ))}
+                      focusVisibleClassName={classes.focusVisible}
+                      style={{
+                        width: image.width
+                      }}
+                    >
+                      <span
+                        className={classes.imageSrc}
+                        style={{
+                          backgroundImage: `url(${image.url})`,
+                        }}
+                      />
+                      <span className={classes.imageBackdrop} />
+                      <span className={classes.imageButton}>
+                        <Typography
+                          component="span"
+                          variant="subtitle1"
+                          color="inherit"
+                          className={classes.imageTitle}
+                        >
+                          {image.title}
+                          <span className={classes.imageMarked} />
+                        </Typography>
+                      </span>
+                    </ButtonBase>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }

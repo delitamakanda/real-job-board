@@ -1,29 +1,11 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { barHeight } from "../../constants";
 import styled from "@emotion/styled";
 import { sidebarWidth } from "../../constants";
-import { useTheme, Button } from "@material-ui/core";
+import { useTheme } from "@material-ui/core";
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../containers/sidebar/Sidebar';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-
-const Title = styled.h1`
-  margin-top: 0;
-  margin-bottom: 0.75rem;
-`;
-
-const Item = styled.div`
-  font-size: 1rem;
-  color: #333;
-`;
 
 const Main = styled.div`
   ${(props) => props.theme.breakpoints.up("sm")} {
@@ -54,17 +36,12 @@ const Wrapper = ({ children }) => {
   const theme = useTheme();
 
   return (
-    <Container theme={theme}>
-      <Item>
-        <Title>DopeJob</Title>
-      </Item>
-      <Item><Button component={Link} to="/signup" color="inherit">Signup</Button></Item>
-      <Item><Button component={Link} to="/login" color="inherit">Login</Button></Item>
-      <div>
+    <div className="flex flex-col min-h-screen overflow-hidden" theme={theme}>
+      <main className="flex-grow">
         {children}
-      </div>
+      </main>
       <Copyright></Copyright>
-    </Container>
+    </div>
   );
 };
 
@@ -72,12 +49,14 @@ const WrapperAuthenticated = ({ children }) => {
   const theme = useTheme();
 
   return (
-    <div>
-      <Sidebar />
-      <Main theme={theme}>
-        <Navbar />
-        {children}
-      </Main>
+    <div className="flex flex-col min-h-screen overflow-hidden">
+      <main className="flex-grow">
+        <Sidebar />
+        <Main theme={theme}>
+          <Navbar />
+          {children}
+        </Main>
+      </main>
       <Copyright></Copyright>
     </div>
   );

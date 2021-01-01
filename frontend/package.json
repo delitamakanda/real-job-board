@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
+    "aos": "^2.3.4",
+    "autoprefixer": "^10.1.0",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "cruip-js-toolkit": "^1.0.2",
     "lodash": "^4.17.20",
+    "node-sass": "^5.0.0",
+    "postcss": "^8.2.2",
+    "postcss-cli": "^8.3.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-app-rewired": "^2.1.5",
@@ -19,15 +26,18 @@
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
     "react-scripts": "^3.4.3",
+    "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "tailwindcss": "^2.0.2",
     "webpack-bundle-tracker": "^0.4.3"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "npm run watch:css && react-app-rewired start",
+    "build": "npm run watch:css && react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/output.css"
   },
   "eslintConfig": {
     "extends": "react-app"

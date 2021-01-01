@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchInput from './SearchInput';
 import SearchResults from './SearchResults';
+import Header from '../../components/Header';
 
 class Search extends Component {
 
   render() {
-    const { search } = this.props;
+    const { search, isAuthenticated } = this.props;
     return (
-      <div>
-        <h2>Search</h2>
-        <div>
+      <div className={isAuthenticated ? "" : "flex flex-col min-h-screen overflow-hidden"}>
+        {!isAuthenticated ? <Header /> : <div></div> }
+        <main className="flex-grow">
           <SearchInput />
-        </div>
-        <SearchResults show={search.input_value.length > 2} />
+          <SearchResults show={search.input_value.length > 2} />
+        </main>
       </div>
     );
   }
@@ -21,7 +22,8 @@ class Search extends Component {
 
 const mapStateToProps = state => {
   return {
-    search: state.search
+    search: state.search,
+    isAuthenticated: !!state.auth.token
   }
 }
 

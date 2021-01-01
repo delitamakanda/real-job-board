@@ -13,15 +13,17 @@ class SearchResults extends Component {
         const items = search.data.map((item, i) => {
             return <li>item.name</li>
         })
-        return (show) ? <div>
-            <div className="overlay-bg" onClick={Search.clearSearch}></div>
-            <div className="search-wrapper">
-                <div className="search-results">
-                    { (items.length > 0) ? items : (search.loading) ? <Spinner /> : <div>Pas de résultats.</div>}
+        return (show) ? <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="max-w-sm mx-auto">
+                <div className="overlay-bg" onClick={Search.clearSearch}></div>
+                <div className="search-wrapper">
+                    <div className="search-results">
+                        {(items.length > 0) ? items : (search.loading) ? <Spinner /> : <div>Pas de résultats.</div>}
+                    </div>
                 </div>
             </div>
         </div>
-        : null;
+            : null;
     }
 }
 

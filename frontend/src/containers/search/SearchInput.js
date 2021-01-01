@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Input from '../../components/Input';
 import * as Search from '../../store/actions/search';
-
+import HeroSearch from './HeroSearch';
 
 class SearchInput extends Component {
     searchDebounceTimer;
@@ -22,16 +22,22 @@ class SearchInput extends Component {
     }
 
     render() {
-        const { search, Search } = this.props;
+        const { search, Search, isAuthenticated } = this.props;
         const rightCrossIcon = (search.input_value.length > 0) ? "fa fa-times-thin" : "";
         return (
             <div>
-                <Input leftIcon="fa fa-search" type="text"
-                    placeHolder="Search"
-                    rightIcon={rightCrossIcon}
-                    onChange={this.onSearchTextChange}
-                    onRightIconClick={Search.clearSearch}
-                    value={search.input_value || ""} />
+                { !isAuthenticated ? <HeroSearch /> : <div></div>}
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="max-w-sm mx-auto">
+                        <Input leftIcon="fa fa-search" type="text"
+                            placeHolder="Search"
+                            rightIcon={rightCrossIcon}
+                            onChange={this.onSearchTextChange}
+                            onRightIconClick={Search.clearSearch}
+                            className="form-input w-full text-gray-800"
+                            value={search.input_value || ""} />
+                    </div>
+                </div>
             </div>
         );
     }
@@ -39,7 +45,8 @@ class SearchInput extends Component {
 
 const mapStateToProps = state => {
     return {
-        search: state.search
+        search: state.search,
+        isAuthenticated: !!state.auth.token
     }
 }
 

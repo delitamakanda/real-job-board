@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import CustomLayout from './containers/layout/Layout';
 import BaseRouter from './routes';
-// import './assets/styles/index.css';
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { Global, css } from "@emotion/core";
 import { theme, modalPopperAutocompleteModalIndex } from "./constants";
 import { FOCUS_BOX_SHADOW } from './utils/colors';
 
 import * as authActions from './store/actions/auth';
-
-// import './assets/styles/App.css';
+import  './assets/styles/App.css';
+import  './assets/styles/index.css';
+import  './assets/styles/output.css';
 
 class App extends Component {
 
