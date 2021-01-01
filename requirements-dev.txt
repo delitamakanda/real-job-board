@@ -1,6 +1,6 @@
 Django==2.2.13
 olefile==0.44
-Pillow==7.1.0
+Pillow==8.0.0
 pytz==2017.3
 gunicorn>=19.6.0
 whitenoise==4.1.4
@@ -16,7 +16,7 @@ html2text==2018.1.9
 html5lib==1.0.1
 django-countries==5.5
 django-rest-auth==0.9.5
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==4.3.0
 stripe==2.41.0
 coreapi==2.3.3
 django-allauth==0.40.0
