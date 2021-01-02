@@ -56,3 +56,4 @@
 24. https://slack.engineering/creating-a-react-analytics-logging-library/
 24. https://css-tricks.com/creating-ui-components-in-svg/
 25. https://saasitive.com/tutorial/react-authenticated-component/
+26. https://github.com/SoftwareBrothers/admin-bro/tree/master/src
