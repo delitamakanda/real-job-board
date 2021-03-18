@@ -1,4 +1,4 @@
-Django==2.2.13
+Django==2.2.18
 olefile==0.44
 Pillow==8.0.0
 pytz==2017.3
