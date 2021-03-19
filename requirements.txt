@@ -24,7 +24,7 @@ djangorestframework-simplejwt==4.3.0
 stripe==2.41.0
 coreapi==2.3.3
 django-allauth==0.40.0
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 markdown==2.6.11
 django-cors-headers==3.2.0
 pyyaml==5.2
