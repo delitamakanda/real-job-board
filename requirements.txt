@@ -1,6 +1,6 @@
 Django==2.2.21
 olefile==0.44
-Pillow==8.1.1
+Pillow==8.2.0
 pytz==2017.3
 gunicorn>=19.6.0
 psycopg2-binary
